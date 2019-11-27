@@ -19,22 +19,6 @@ body {
 }
 
 
-header{
-    grid-area: header;
-    background-color: crimson;
-}
-
-aside{
-    grid-area: aside;
-    background-color: rgb(170, 220, 20);
-}
-
-.caldendar-container{
-    grid-area: caldendar-container;
-    background-color: green;
-    display: none;
-}
-
 @media only screen and (min-width: 45em){
 
     body {
@@ -47,9 +31,5 @@ aside{
         "header header"
         "aside caldendar-container"
         ;
-    }
-
-    .caldendar-container{
-        display: block;
     }
 }
