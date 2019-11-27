@@ -1,3 +1,3 @@
 function addTodo(){
-    console.log('todo');
+    console.log('hohoo');
 }
