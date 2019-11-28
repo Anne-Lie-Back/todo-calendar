@@ -9,7 +9,7 @@
     .calendar-container{
         display: grid;
         grid-template-columns: repeat(7, auto);/*set grid to 7 columns monday to sunday.*/
-        grid-template-rows: 2rem;/*set first row to fixed height for day of week name.*/
+        grid-template-rows: 4rem;/*set first row to fixed height for day of week name.*/
         gap: 0.2rem;
     }
 
