@@ -9,12 +9,17 @@
     .calendar-container{
         display: grid;
         grid-template-columns: repeat(7, auto);/*set grid to 7 columns monday to sunday.*/
-        grid-template-rows: 4rem;/*set first row to fixed height for day of week name.*/
+        grid-template-rows: 2rem 2rem;/*set first row to fixed height for day of week name.*/
         gap: 0.2rem;
+    }
+    .calendar-top{
+        background-color: white;
+        text-align: center;
+        overflow: hidden;
     }
 
     .calendar-header{
-        background-color: steelblue;
+        background-color: rgb(218, 218, 122);
         text-align: center;
         overflow: hidden;
     }
