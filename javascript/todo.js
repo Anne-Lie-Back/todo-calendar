@@ -72,12 +72,18 @@ function addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue){
     
 }
 
+
 function createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue){
     console.log(titleTodoValue, dateTodoValue)
 
     const ul = document.querySelector(".todoList");
     const li = document.createElement('li');
-    const div = document.createElement('div');
+    const div1 = document.createElement('div');
+    const div2 = document.createElement('div');
+    const iconEdit = document.createElement('i');
+    iconEdit.setAttribute("class", "fas fa-ellipsis-h editTodoIcon");
+    const iconRemove = document.createElement('i')
+    iconRemove.setAttribute("class", "fas fa-minus-circle removeTodoIcon")
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
 
@@ -85,9 +91,18 @@ function createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue){
     const todoDate = document.createElement('span');
 
     ul.append(li);
-    li.append(div);
-    div.append(checkbox, todoText);
+    li.append(div1, div2);
+    div1.append(checkbox, todoText);
     todoText.append(titleTodoValue, todoDate);
-    todoDate.append(dateTodoValue, monthTodoValue);
+    todoDate.append(dateTodoValue, monthTodoValue, iconEdit, iconRemove);
+    div2.append(iconEdit, iconRemove);
 
+   iconRemove.addEventListener('click', removeTodo);
+}
+
+
+function removeTodo(){
+    let doneTodo = event.target.closest('li');
+    doneTodo.remove();
+ 
 }
