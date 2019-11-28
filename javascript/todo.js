@@ -32,7 +32,7 @@ function hideTodoInput(inputButton, inputField, inputDates){
     inputButton.className = "fas fa-plus";
     //inputField.style.display = "flex";
     inputField.style.height = "0";
-    inputDates.style.display = "none";
+    //inputDates.style.display = "none";
     console.log('closed');
 }
 
@@ -40,7 +40,7 @@ function showTodoInput (inputButton, inputField, inputDates){
 
     inputButton.className = "fas fa-times";
     //inputField.style.display = "flex";
-    inputField.style.height = "30rem";
+    inputField.style.height = "15rem";
     inputDates.style.display = "flex";
     console.log('visable');
 }
@@ -63,8 +63,11 @@ function gatherTodoInput(){
     let dateTodoValue = dateTodo.value;
     let monthTodoValue = monthTodo.value;
     console.log(titleTodo.value, dateTodo.value, monthTodo.value);
-    addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue)
-    showAndHideTodoInput()
+    addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue);
+    titleTodo.value = "";
+    //Why not reseted to 1?
+    dateTodo.value = 1;
+    monthTodo.value ="Januari";
 }
 
 function addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue){
