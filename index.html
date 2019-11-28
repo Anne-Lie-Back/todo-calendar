@@ -21,7 +21,7 @@
     <aside>
         <div class="prototype"></div>
         <div class="todoContainer">
-            <ul class="todo">
+            <ul class="todoList">
                 <li>
                     <div>
                         <input type="checkbox">
@@ -32,105 +32,35 @@
                         <i class="fas fa-minus-circle removeTodoIcon"></i>                   
                     </div>
                 </li>
-                <li>
-                        <div>
-                            <input type="checkbox">
-                            <p>Hellu <span>7 dec</span></p>
-                        </div>
-                        <div>
-                            <i class="fas fa-ellipsis-h editTodoIcon"></i>
-                            <i class="fas fa-minus-circle removeTodoIcon"></i>                   
-                        </div>
-                    </li>
-                    <li>
-                            <div>
-                                <input type="checkbox">
-                                <p>Hellu <span>7 dec</span></p>
-                            </div>
-                            <div>
-                                <i class="fas fa-ellipsis-h editTodoIcon"></i>
-                                <i class="fas fa-minus-circle removeTodoIcon"></i>                   
-                            </div>
-                        </li>
-                        <li>
-                                <div>
-                                    <input type="checkbox">
-                                    <p>Hellu <span>7 dec</span></p>
-                                </div>
-                                <div>
-                                    <i class="fas fa-ellipsis-h editTodoIcon"></i>
-                                    <i class="fas fa-minus-circle removeTodoIcon"></i>                   
-                                </div>
-                            </li>
-                            <li>
-                                    <div>
-                                        <input type="checkbox">
-                                        <p>Hellu <span>7 dec</span></p>
-                                    </div>
-                                    <div>
-                                        <i class="fas fa-ellipsis-h editTodoIcon"></i>
-                                        <i class="fas fa-minus-circle removeTodoIcon"></i>                   
-                                    </div>
-                                </li>
-                                <li>
-                                        <div>
-                                            <input type="checkbox">
-                                            <p>Hellu <span>7 dec</span></p>
-                                        </div>
-                                        <div>
-                                            <i class="fas fa-ellipsis-h editTodoIcon"></i>
-                                            <i class="fas fa-minus-circle removeTodoIcon"></i>                   
-                                        </div>
-                                    </li>
-                                    <li>
-                                            <div>
-                                                <input type="checkbox">
-                                                <p>Hellu <span>7 dec</span></p>
-                                            </div>
-                                            <div>
-                                                <i class="fas fa-ellipsis-h editTodoIcon"></i>
-                                                <i class="fas fa-minus-circle removeTodoIcon"></i>                   
-                                            </div>
-                                        </li>
-                                        <li>
-                                                <div>
-                                                    <input type="checkbox">
-                                                    <p>Hellu <span>7 dec</span></p>
-                                                </div>
-                                                <div>
-                                                    <i class="fas fa-ellipsis-h editTodoIcon"></i>
-                                                    <i class="fas fa-minus-circle removeTodoIcon"></i>                   
-                                                </div>
-                                            </li>
             </ul>
             <div class="addTodo">
                 <div class="inputTodoField slideInputText">
                     <div class="hideInputText">
-                        <input type="text" placeholder="What todo?">
+                        <input type ="text" id="titleTodo" placeholder="What todo?">
                         <div class ="inputDate">
-                            <select>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
+                            <select id ="inputDate">
+                                <option value=" 1 ">1</option>
+                                <option value=" 2 ">2</option>
+                                <option value=" 3 ">3</option>
+                                <option value=" 4 ">4</option>
+                                <option value=" 5 ">5</option>
+                                <option value=" 6 ">6</option>
+                                <option value=" 7 ">7</option>
+                                <option value=" 8 ">8</option>
+                                <option value=" 9 ">9</option>
+                                <option value=" 10 ">10</option>
+                                <option value=" 11 ">11</option>
+                                <option value=" 12 ">12</option>
+                                <option value=" 13 ">13</option>
+                                <option value=" 14 ">14</option>
+                                <option value=" 15 ">15</option>
                             </select>
-                            <select>
-                                <option value="December">Januari</option>
-                                <option value="Januari">Februari</option>
-                                <option value="Februari">Mars</option>
-                                <option value="Mars">April</option>
-                                <option value="April">Maj</option>
+                            <select id ="inputMonth">
+                                <option value="Januari">Januari</option>
+                                <option value="Februari">Februari</option>
+                                <option value="Mars">Mars</option>
+                                <option value="April">April</option>
+                                <option value="Maj">Maj</option>
                             </select>
                             <button id="addWrittenTodo"> Add! </button>
                         </div>

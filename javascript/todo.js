@@ -1,20 +1,93 @@
 function addTodo(){
-    const showInput = document.querySelector(".addTodoButton");
-    showInput.addEventListener('click', showTodoInput);
+    const addTodoButton = document.querySelector(".addTodoButton");
+    addTodoButton.addEventListener('click', showAndHideTodoInput);
     console.log('todo is STARTED');
+    initAddTodoToList()
+}
+
+
+/**
+ * *************SHOWING AND HIDEING INPUT FIELD***************
+ */
+//PUT IN FUNCTION LATER!!!
+let inputShown = false;
+
+function showAndHideTodoInput(){
+    const inputField = document.querySelector(".slideInputText");
+    const inputDates = document.querySelector(".hideInputText");
+    const inputButton = document.querySelector(".addTodoButton i");
+    
+    if (inputShown){
+        hideTodoInput(inputButton, inputField, inputDates)
+        inputShown = false;
+    }
+
+    else{
+        showTodoInput(inputButton, inputField, inputDates);
+        inputShown = true;
+    }
+}
+
+function hideTodoInput(inputButton, inputField, inputDates){
+    inputButton.className = "fas fa-plus";
+    //inputField.style.display = "flex";
+    inputField.style.height = "0";
+    inputDates.style.display = "none";
+    console.log('closed');
+}
+
+function showTodoInput (inputButton, inputField, inputDates){
+
+    inputButton.className = "fas fa-times";
+    //inputField.style.display = "flex";
+    inputField.style.height = "30rem";
+    inputDates.style.display = "flex";
+    console.log('visable');
+}
+
+/***
+ * ************ ACTUALLY ADDING TODO ********
+ */
+
+function initAddTodoToList(){
+    const addWrittenTodo = document.querySelector("#addWrittenTodo");
+    addWrittenTodo.addEventListener('click', gatherTodoInput);
+}
+
+function gatherTodoInput(){
+ 
+    let titleTodo = document.querySelector("#titleTodo");
+    let dateTodo = document.querySelector("#inputDate");
+    let monthTodo = document.querySelector("#inputMonth");
+    let titleTodoValue = titleTodo.value + "";
+    let dateTodoValue = dateTodo.value;
+    let monthTodoValue = monthTodo.value;
+    console.log(titleTodo.value, dateTodo.value, monthTodo.value);
+    addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue)
+    showAndHideTodoInput()
+}
+
+function addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue){
+    createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue)
     
 }
 
-function showTodoInput (){
+function createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue){
+    console.log(titleTodoValue, dateTodoValue)
 
-    const inputField = document.querySelector(".slideInputText");
-    const inputDates = document.querySelector(".hideInputText");
-    //inputField.style.display = "flex";
-    inputField.style.height = "80%";
-    inputDates.style.display = "flex";
+    const ul = document.querySelector(".todoList");
+    const li = document.createElement('li');
+    const div = document.createElement('div');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
 
+    const todoText = document.createElement('p');
+    const todoDate = document.createElement('span');
 
-    
-    console.log('input showed!');
+    ul.append(li);
+    li.append(div);
+    div.append(checkbox, todoText);
+    todoText.append(titleTodoValue, todoDate);
+    todoDate.append(dateTodoValue, monthTodoValue);
 
 }
