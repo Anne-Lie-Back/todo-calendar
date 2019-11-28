@@ -80,10 +80,7 @@ aside{
 
 .inputTodoField{
     background-color:white;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction:column;
+
     width:100%;
     height:80vh;
     position: absolute;
@@ -113,7 +110,18 @@ aside{
     padding: 0.3rem 0.7rem;
 }
 
-.hidden{
-    display:none;
+.slideInputText{
+    height:0;
+    transition: height 1000ms;
 }
+
+.hideInputText{
+    display:none;
+    width:100%;
+    height:100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+}
+
 
