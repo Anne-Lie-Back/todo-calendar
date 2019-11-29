@@ -1,7 +1,13 @@
+//TEACHER ADDED THIS
+//let currentTime = new Date()
 
- setInterval(setTime, 500);
+ setInterval(setTime, 1000);
 
   function setTime() {
+
+    //TEACHER ADDED THIS
+    //currentTime.setSeconds(currentTime.getSeconds() + 1)
+
     //Collects the time
     let timeAndDateNow = new Date();
     let date = timeAndDateNow.getDate();

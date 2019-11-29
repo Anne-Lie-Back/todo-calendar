@@ -64,6 +64,10 @@ function gatherTodoInput(){
     let titleTodoValue = titleTodo.value;
     let monthTodoValue = monthTodo.value;
     
+//TEACHER ADDED DISS
+    //let currentDate = new Date()
+
+
     let todoObject = {}
     todoObject.title = titleTodo.value;
     todoObject.day = dateTodo.value;
