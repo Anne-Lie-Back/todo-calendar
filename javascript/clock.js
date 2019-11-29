@@ -40,12 +40,3 @@
     displayDateAside.innerHTML = date;
     displayClockAside.innerHTML = time;
   }
-
-
-/**
- *             <div class="dates-and-clock-mobile">
-                    <div class="display-date-aside">00</div>
-                    <div class="display-month-aside">XXX</div>
-                    <div class="display-clock-aside">00:00</div>
-                </div> 
- */
