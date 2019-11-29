@@ -11,8 +11,7 @@ body {
     height:100vh;
     display: grid;
     grid-template-columns: auto;
-    /*Changed for testing*/
-    grid-template-rows: 3rem auto;
+    grid-template-rows: 9rem auto;
     grid-template-areas: 
     "header"
     "aside"
