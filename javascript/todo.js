@@ -31,7 +31,7 @@ function showAndHideTodoInput(){
 function hideTodoInput(inputButton, inputField, inputDates){
     inputButton.className = "fas fa-plus";
     //inputField.style.display = "flex";
-    inputField.style.height = "0";
+    inputField.style.height = "2.5rem";
     //inputDates.style.display = "none";
     console.log('closed');
 }
