@@ -1,0 +1,185 @@
+body{
+    overflow: hidden;
+}
+
+aside{
+    display:flex;
+    flex-direction:column;
+}
+
+.prototype{
+    background-color:skyblue;
+    width:100%;
+    height:7rem;
+}
+
+.todoContainer{
+    display:flex;
+    flex-direction:column;
+    background-color:white;
+    width:100%;
+    flex-grow:1;
+}
+
+.addTodoButton{
+    width:100%;
+    display:flex;
+    position:absolute;
+    bottom:0;
+    justify-content: flex-end;
+    height:5rem;
+    background-color:white;
+}
+
+.addTodoButton i{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#fbed21;
+    border-radius: 50rem;
+    font-size:1.6rem;
+    padding:1rem;
+    margin:0.7rem 1rem 1rem 0.7rem;
+    width: 3.5rem;
+    height:3.5rem; 
+    transition: background-color 1000ms; 
+    transition: color 500ms;
+}
+
+.addTodoButton i:hover{
+    color: #fbed21;
+    background-color:black;
+    cursor: pointer;
+}
+
+.todoList{
+    overflow-y: auto;
+    background-color:white;
+    height:22rem;
+
+}
+
+.todoList li{
+    padding: 0.5rem 1rem;
+    border-bottom: 0.15rem solid black;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todoList li div{
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+}
+
+.todoList li div input{
+    margin:0 0.5rem 0 0;
+}
+
+.todoList span{
+    font-size:0.7rem;
+    margin:0 0.3rem 0 0.3rem;
+}
+
+.todoList i{
+    margin: 0.2rem;
+}
+
+.todoList .removeTodoIcon{
+    font-size:1.5rem;
+}
+
+
+.todoList .removeTodoIcon:hover{
+ cursor: pointer;
+ color: #fbed21;
+ background-color: black;
+ border-radius:50px;
+ transition: color 350ms ease-in-out;
+}
+
+.todoList .editTodoIcon{
+    color:white;
+    background-color: black;
+    padding: 0.3rem;
+    border-radius: 5rem;
+    font-size:0.9rem;
+}
+
+.inputTodoField{
+    background-color:white;
+
+    width:100%;
+    height:80vh;
+    
+    bottom:3rem;
+
+}
+
+.inputTodoField input{
+    width:15rem;
+    padding:0.5rem;
+    margin: 1rem;
+    border: 3px solid black;
+
+}
+.inputDate{
+    display:flex;
+    flex-direction:row;
+    width:15rem;
+    display:flex;
+    justify-content: space-between;
+}
+
+.inputDate button{
+    padding: 0.3rem 0.7rem;
+    background-color: #fbed21;
+    border:3px solid black;
+}
+
+.inputDate button:hover{
+    cursor: pointer;
+    color:#fbed21;
+    background-color:black;
+    transition: color 300ms ease-in-out;
+    transition: background-color 300ms ease-in-out;
+}
+
+.inputDate select{
+    padding: 0.3rem 0.7rem;
+    border:3px solid black;
+}
+
+.slideInputText{
+    position:absolute;
+    height:2.5rem;
+    transition: height 1000ms;
+}
+
+.hideInputText{
+    
+    width:100%;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction:column;
+    padding: 2rem 0 0 0;
+    border-top: 3px solid black;
+   
+}
+
+@media only screen and (min-width: 45em){
+
+    .todoList{
+        height: 22rem;
+    }
+
+    .addTodoButton{
+        width:20rem;
+    }
+
+    .slideInputText{
+        width:20rem;
+    }
+}
+
