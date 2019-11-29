@@ -1,4 +1,50 @@
 header{
     grid-area: header;
-    background-color: crimson;
+    background-color: #ffffff;
+}
+
+.headerBanner{
+    background-color: #fbed21;
+    height: 6rem;
+    margin: 2rem 0 0 0;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo p{
+    color: #fbed21;;
+    -webkit-text-stroke: 2px black;
+    font-size: 5rem;
+    line-height: 100%;
+}
+
+.dates-and-clock-mobile{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    line-height: 120%;
+    margin: 0.4rem 0 0 0;
+    text-align: center;
+}
+
+.display-date {
+    font-size: 2.5rem;
+    margin: 0.1rem;
+}
+
+.display-month {
+    font-size: 0.8rem;
+    margin: 0.1rem;
+    
+}
+.time-mobile{
+    font-size: 1.2rem;
+}
+
+
+@media only screen and (min-width: 45em){
+    .dates-and-clock-mobile{
+        display: none;
+    }
 }

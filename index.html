@@ -8,15 +8,86 @@
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/aside.css">
     <link rel="stylesheet" href="./css/calendar-container.css">
+    <link rel="stylesheet" href="./css/todo.css">
+    <script src="https://kit.fontawesome.com/165da34037.js" crossorigin="anonymous"></script>
+    <script src="./javascript/todo.js"></script>
     <script src="./javascript/javascript.js"></script>
     <script src="javascript/calendar.js"></script>
+    <script src="javascript/clock.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
     <title>TODO</title>
 </head>
 <body>
-    <header><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium neque animi eligendi accusamus consequuntur culpa. Numquam, aspernatur ex earum, iusto necessitatibus fugiat possimus nihil quaerat molestias laboriosam molestiae veniam praesentium.</p></header>
-    <aside><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus aliquid consequatur sed vero officia pariatur eos quam amet, ullam, alias, laboriosam porro optio! Asperiores inventore expedita eos, provident consequuntur atque!</p></aside>
-    <div class="calendar-container">
+    <header>
+        <div class="headerBanner">
+            <div class="logo"><p>Todo</p></div>
+            <div class="dates-and-clock-mobile">
+                <div class="display-date"></div>
+                <div class="display-month"></div>
+                <div class="display-clock"></div>
+            </div>
+        </div>
+    </header>
+    <aside>
+        <div class="prototype">
+                <div class="display-date-aside"></div>
+                <div class="display-month-aside"></div>
+                <div class="display-clock-aside"></div>
+        </div>
+        <div class="todoContainer">
+            <ul class="todoList">
+            </ul>
+            <div class="addTodo">
+                <div class="inputTodoField slideInputText">
+                    <div class="hideInputText">
+                        <input type ="text" id="titleTodo" placeholder="What todo?">
+                        <div class ="inputDate">
+                            <select id ="inputDate">
+                                <!--
+                                <option value=" 1 ">1</option>
+                                <option value=" 2 ">2</option>
+                                <option value=" 3 ">3</option>
+                                <option value=" 4 ">4</option>
+                                <option value=" 5 ">5</option>
+                                <option value=" 6 ">6</option>
+                                <option value=" 7 ">7</option>
+                                <option value=" 8 ">8</option>
+                                <option value=" 9 ">9</option>
+                                <option value=" 10 ">10</option>
+                                <option value=" 11 ">11</option>
+                                <option value=" 12 ">12</option>
+                                <option value=" 13 ">13</option>
+                                <option value=" 14 ">14</option>
+                                <option value=" 15 ">15</option>
+                            -->
+                            </select>
+                            <select id ="inputMonth">
+                                <option value="Januari">Januari</option>
+                                <option value="Februari">Februari</option>
+                                <option value="Mars">Mars</option>
+                                <option value="April">April</option>
+                                <option value="Maj">Maj</option>
+                                <option value="Juni">Juni</option>
+                                <option value="Juli">Juli</option>
+                                <option value="Augusti">Augusti</option>
+                                <option value="September">September</option>
+                                <option value="Oktober">Oktober</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                            <button id="addWrittenTodo">
+                                <i class="fas fa-check"></i> 
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="addTodoButton"> 
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+        </div>
+    </aside>
+<div class="calendar-container">
         <div class="calendar-top" onclick="prevMonth()">Previous</div>
         <div class="calendar-top"></div>
         <div class="calendar-top">2019</div>
