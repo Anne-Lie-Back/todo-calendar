@@ -117,6 +117,7 @@ function calendarDayClicked(event){
 //API for holidays.
 async function helgDagarAPI(){
     //add try catch later. TODO.
+    //new brach calendar-helgdagar.
     const response = await fetch('https://api.dryg.net/dagar/v2.1/2019/11');
     const jsonResponse = await response.json();
     console.log(jsonResponse);
