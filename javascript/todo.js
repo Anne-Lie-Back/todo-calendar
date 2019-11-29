@@ -1,7 +1,10 @@
+let listOfTodos = [];
+
+
+
 function addTodo(){
     const addTodoButton = document.querySelector(".addTodoButton");
     addTodoButton.addEventListener('click', showAndHideTodoInput);
-    console.log('todo is STARTED');
     initAddTodoToList()
 }
 
@@ -30,20 +33,15 @@ function showAndHideTodoInput(){
 
 function hideTodoInput(inputButton, inputField, inputDates){
     inputButton.className = "fas fa-plus";
-    //inputField.style.display = "flex";
     inputField.style.height = "2.5rem";
-    //inputDates.style.display = "none";
-    console.log('closed');
+
 }
 
 function showTodoInput (inputButton, inputField, inputDates){
 
     inputButton.className = "fas fa-times";
-    //inputField.style.display = "flex";
     inputField.style.height = "15rem";
     inputDates.style.display = "flex";
-    
-    console.log('visable');
 }
 
 /***
@@ -55,31 +53,43 @@ function initAddTodoToList(){
     addWrittenTodo.addEventListener('click', gatherTodoInput);
 }
 
+/****** PUT IN FUNCTION! NOT GLOBAL PLS (ONLY GLOBAL FOR TESTING) **/
+
 function gatherTodoInput(){
- 
-    let titleTodo = document.querySelector("#titleTodo");
-    let dateTodo = document.querySelector("#inputDate");
-    let monthTodo = document.querySelector("#inputMonth");
-    let titleTodoValue = titleTodo.value + "";
+    const monthTodo = document.querySelector("#inputMonth");
+    const titleTodo = document.querySelector("#titleTodo");
+    const dateTodo = document.querySelector("#inputDate");
+    
     let dateTodoValue = dateTodo.value;
+    let titleTodoValue = titleTodo.value;
     let monthTodoValue = monthTodo.value;
-    console.log(titleTodo.value, dateTodo.value, monthTodo.value);
+    
+//TEACHER ADDED DISS
+    //let currentDate = new Date()
+
+
+    let todoObject = {}
+    todoObject.title = titleTodo.value;
+    todoObject.day = dateTodo.value;
+    todoObject.month = monthTodo.value;
+    console.log(todoObject)
+    listOfTodos.push(todoObject);
+    console.log(listOfTodos)
+    //console.log(titleTodoValue, dateTodoValue, monthTodoValue);
     addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue);
+
     titleTodo.value = "";
     //Why not reseted to 1?
-    dateTodo.value = 1;
+    dateTodo.value = "1";
     monthTodo.value ="Januari";
 }
 
 function addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue){
-    createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue)
-    
+    createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue)    
 }
 
 
 function createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue){
-    console.log(titleTodoValue, dateTodoValue)
-
     const ul = document.querySelector(".todoList");
     const li = document.createElement('li');
     const div1 = document.createElement('div');
@@ -112,6 +122,8 @@ function removeTodo(){
 }
 
 /**SHOWING RIGHT DATE - INPUT VALUES IN SELECTION **/
+
+
 
 
 
