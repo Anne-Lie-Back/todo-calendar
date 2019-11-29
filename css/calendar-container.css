@@ -1,0 +1,29 @@
+
+.calendar-container{
+    grid-area: calendar-container;
+    background-color: white;
+    display: none;
+}
+
+@media only screen and (min-width: 45em){
+    .calendar-container{
+        display: grid;
+        grid-template-columns: repeat(7, auto);/*set grid to 7 columns monday to sunday.*/
+        grid-template-rows: 2rem 2rem;/*set first row to fixed height for day of week name.*/
+        gap: 0.2rem;
+    }
+    .calendar-top{
+        background-color: white;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .calendar-header{
+        background-color: rgb(218, 218, 122);
+        text-align: center;
+        overflow: hidden;
+    }
+    .calendar-day{
+        background-color: thistle;
+    }
+}

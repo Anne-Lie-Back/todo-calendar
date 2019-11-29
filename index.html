@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/aside.css">
-    <link rel="stylesheet" href="./css/caldendar-container.css">
+    <link rel="stylesheet" href="./css/calendar-container.css">
     <link rel="stylesheet" href="./css/todo.css">
     <script src="https://kit.fontawesome.com/165da34037.js" crossorigin="anonymous"></script>
     <script src="./javascript/todo.js"></script>
@@ -18,7 +18,6 @@
     <title>TODO</title>
 </head>
 <body>
-
     <header>
         <div class="headerBanner">
             <div class="logo"><p>Todo</p></div>
@@ -88,6 +87,21 @@
             </div>
         </div>
     </aside>
-    <div class="caldendar-container"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed amet quaerat neque, nam facere quasi fugiat labore ducimus assumenda inventore tempore itaque ut temporibus quam dolore mollitia. Eos, consequuntur animi?</p></div>
+<div class="calendar-container">
+        <div class="calendar-top" onclick="prevMonth()">Previous</div>
+        <div class="calendar-top"></div>
+        <div class="calendar-top">2019</div>
+        <div class="calendar-top"></div>
+        <div class="calendar-top">Nov</div>
+        <div class="calendar-top"></div>
+        <div class="calendar-top" onclick="nextMonth()">Next</div>
+        <div class="calendar-header">Monday <br> --Okt</div>
+        <div class="calendar-header">Tuesday</div>
+        <div class="calendar-header">Wednesday</div>
+        <div class="calendar-header">Thursday</div>
+        <div class="calendar-header">Friday</div>
+        <div class="calendar-header">Saturday</div>
+        <div class="calendar-header">Sunday <br> Dec--</div>
+    </div>
 </body>
 </html>
