@@ -10,6 +10,7 @@ function calendarStart(){
     addDaysToCalendar(currentViewYear,currentViewMonth);
     //addDaysToCalendar(2020,1);
     document.querySelector('.calendar-container').addEventListener('click', event => {calendarDayClicked(event);});
+    //helgDagarAPI();
 }
 
 function addDaysToCalendar(setYear,setMonth){
@@ -111,4 +112,12 @@ function calendarDayClicked(event){
         console.log(event.target.className);
     }
     
+}
+
+//API for holidays.
+async function helgDagarAPI(){
+    //add try catch later. TODO.
+    const response = await fetch('https://api.dryg.net/dagar/v2.1/2019/11');
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
 }
