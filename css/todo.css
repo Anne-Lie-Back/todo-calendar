@@ -45,7 +45,6 @@ body{
     overflow-y: auto;
     background-color:white;
     height:22rem;
-
 }
 
 .todoList li{
@@ -98,12 +97,9 @@ body{
 
 .inputTodoField{
     background-color:white;
-
     width:100%;
-    height:80vh;
-    
+    height:80vh;  
     bottom:3rem;
-
 }
 
 .inputTodoField input{
@@ -113,6 +109,7 @@ body{
     border: 3px solid black;
 
 }
+
 .inputDate{
     display:flex;
     flex-direction:row;
@@ -135,8 +132,16 @@ body{
     transition: background-color 300ms ease-in-out;
 }
 
-.inputDate select{
-    padding: 0.3rem 0.7rem;
+.inputDate button i{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size:1.3rem;
+}
+
+.inputDate input{
+    margin:0 1rem 0 0;
+    padding:0.5rem;
     border:3px solid black;
 }
 
@@ -153,8 +158,7 @@ body{
     justify-content: flex-start;
     flex-direction:column;
     padding: 2rem 0 0 0;
-    border-top: 3px solid black;
-   
+    border-top: 3px solid black; 
 }
 
 @media only screen and (min-width: 45em){
