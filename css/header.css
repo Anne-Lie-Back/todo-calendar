@@ -41,3 +41,10 @@ header{
 .time-mobile{
     font-size: 1.2rem;
 }
+
+
+@media only screen and (min-width: 45em){
+    .dates-and-clock-mobile{
+        display: none;
+    }
+}
