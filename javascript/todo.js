@@ -32,11 +32,9 @@ function showAndHideTodoInput(){
 function hideTodoInput(inputButton, inputFieldContainer, inputField){
     inputButton.className = "fas fa-plus";
     inputFieldContainer.style.height = "2.5rem";
-
 }
 
 function showTodoInput (inputButton, inputFieldContainer, inputField){
-
     inputButton.className = "fas fa-times";
     inputFieldContainer.style.height = "15rem";
     inputField.style.display = "flex";
@@ -70,11 +68,10 @@ function gatherTodoInput(){
     console.log(todoObject)
     listOfTodos.push(todoObject);
     console.log(listOfTodos)
-    //console.log(titleTodoValue, dateTodoValue, monthTodoValue);
+
     addTodoElementToList(titleTodoValue, dateTodoValue);
 
     titleTodo.value = "";
-    //Why not reseted to 1?
     dateTodo.value = null;
 }
 
@@ -94,7 +91,6 @@ function createTodoElement(titleTodoValue, dateTodoValue){
     iconRemove.setAttribute("class", "fas fa-minus-circle removeTodoIcon")
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-
     const todoText = document.createElement('p');
     const todoDate = document.createElement('span');
 
@@ -105,19 +101,11 @@ function createTodoElement(titleTodoValue, dateTodoValue){
     todoDate.append(dateTodoValue, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
 
-   iconRemove.addEventListener('click', removeTodo);
+    iconRemove.addEventListener('click', removeTodo);
 }
 
 
 function removeTodo(){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
- 
 }
-
-/**SHOWING RIGHT DATE - INPUT VALUES IN SELECTION **/
-
-
-
-
-
