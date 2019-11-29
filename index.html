@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/aside.css">
     <link rel="stylesheet" href="./css/caldendar-container.css">
+    <link rel="stylesheet" href="./css/todo.css">
+    <script src="https://kit.fontawesome.com/165da34037.js" crossorigin="anonymous"></script>
+    <script src="./javascript/todo.js"></script>
     <script src="./javascript/javascript.js"></script>
     <script src="javascript/calendar.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
@@ -15,7 +18,53 @@
 </head>
 <body>
     <header><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium neque animi eligendi accusamus consequuntur culpa. Numquam, aspernatur ex earum, iusto necessitatibus fugiat possimus nihil quaerat molestias laboriosam molestiae veniam praesentium.</p></header>
-    <aside><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus aliquid consequatur sed vero officia pariatur eos quam amet, ullam, alias, laboriosam porro optio! Asperiores inventore expedita eos, provident consequuntur atque!</p></aside>
+    <aside>
+        <div class="prototype"></div>
+        <div class="todoContainer">
+            <ul class="todoList">
+                <!-- TODO li happens here -->
+            </ul>
+            <div class="addTodo">
+                <div class="inputTodoField slideInputText">
+                    <div class="hideInputText">
+                        <input type ="text" id="titleTodo" placeholder="What todo?">
+                        <div class ="inputDate">
+                            <select id ="inputDate">
+                                <option value=" 1 ">1</option>
+                                <option value=" 2 ">2</option>
+                                <option value=" 3 ">3</option>
+                                <option value=" 4 ">4</option>
+                                <option value=" 5 ">5</option>
+                                <option value=" 6 ">6</option>
+                                <option value=" 7 ">7</option>
+                                <option value=" 8 ">8</option>
+                                <option value=" 9 ">9</option>
+                                <option value=" 10 ">10</option>
+                                <option value=" 11 ">11</option>
+                                <option value=" 12 ">12</option>
+                                <option value=" 13 ">13</option>
+                                <option value=" 14 ">14</option>
+                                <option value=" 15 ">15</option>
+                            </select>
+                            <select id ="inputMonth">
+                                <option value="Januari">Januari</option>
+                                <option value="Februari">Februari</option>
+                                <option value="Mars">Mars</option>
+                                <option value="April">April</option>
+                                <option value="Maj">Maj</option>
+                            </select>
+                            <button id="addWrittenTodo">
+                                <i class="fas fa-check"></i> 
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="addTodoButton"> 
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+        </div>
+    </aside>
     <div class="caldendar-container"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed amet quaerat neque, nam facere quasi fugiat labore ducimus assumenda inventore tempore itaque ut temporibus quam dolore mollitia. Eos, consequuntur animi?</p></div>
 </body>
 </html>

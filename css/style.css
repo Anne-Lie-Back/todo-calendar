@@ -11,7 +11,8 @@ body {
     height:100vh;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 14rem auto;
+    /*Changed for testing*/
+    grid-template-rows: 3rem auto;
     grid-template-areas: 
     "header"
     "aside"
@@ -32,4 +33,5 @@ body {
         "aside caldendar-container"
         ;
     }
+
 }
