@@ -7,9 +7,9 @@ function addTodo(){
 
 
 /**
- * *************SHOWING AND HIDEING INPUT FIELD***************
+ * *************SHOWING AND HIDING INPUT FIELD***************
  */
-//PUT IN FUNCTION LATER!!!
+//PUT IN FUNCTION LATER!!! No locals pls
 let inputShown = false;
 
 function showAndHideTodoInput(){
@@ -42,6 +42,7 @@ function showTodoInput (inputButton, inputField, inputDates){
     //inputField.style.display = "flex";
     inputField.style.height = "15rem";
     inputDates.style.display = "flex";
+    
     console.log('visable');
 }
 
@@ -109,3 +110,8 @@ function removeTodo(){
     doneTodo.remove();
  
 }
+
+/**SHOWING RIGHT DATE - INPUT VALUES IN SELECTION **/
+
+
+
