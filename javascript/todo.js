@@ -1,7 +1,5 @@
 let listOfTodos = [];
 
-
-
 function addTodo(){
     const addTodoButton = document.querySelector(".addTodoButton");
     addTodoButton.addEventListener('click', showAndHideTodoInput);
@@ -16,32 +14,30 @@ function addTodo(){
 let inputShown = false;
 
 function showAndHideTodoInput(){
-    const inputField = document.querySelector(".slideInputText");
-    const inputDates = document.querySelector(".hideInputText");
+    const inputFieldContainer = document.querySelector(".slideInputText");
+    const inputField = document.querySelector(".hideInputText");
     const inputButton = document.querySelector(".addTodoButton i");
     
     if (inputShown){
-        hideTodoInput(inputButton, inputField, inputDates)
+        hideTodoInput(inputButton, inputFieldContainer, inputField)
         inputShown = false;
     }
 
     else{
-        showTodoInput(inputButton, inputField, inputDates);
+        showTodoInput(inputButton, inputFieldContainer, inputField);
         inputShown = true;
     }
 }
 
-function hideTodoInput(inputButton, inputField, inputDates){
+function hideTodoInput(inputButton, inputFieldContainer, inputField){
     inputButton.className = "fas fa-plus";
-    inputField.style.height = "2.5rem";
-
+    inputFieldContainer.style.height = "2.5rem";
 }
 
-function showTodoInput (inputButton, inputField, inputDates){
-
+function showTodoInput (inputButton, inputFieldContainer, inputField){
     inputButton.className = "fas fa-times";
-    inputField.style.height = "15rem";
-    inputDates.style.display = "flex";
+    inputFieldContainer.style.height = "15rem";
+    inputField.style.display = "flex";
 }
 
 /***
@@ -56,40 +52,35 @@ function initAddTodoToList(){
 /****** PUT IN FUNCTION! NOT GLOBAL PLS (ONLY GLOBAL FOR TESTING) **/
 
 function gatherTodoInput(){
-    const monthTodo = document.querySelector("#inputMonth");
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
     
     let dateTodoValue = dateTodo.value;
     let titleTodoValue = titleTodo.value;
-    let monthTodoValue = monthTodo.value;
     
 //TEACHER ADDED DISS
     //let currentDate = new Date()
 
-
     let todoObject = {}
     todoObject.title = titleTodo.value;
-    todoObject.day = dateTodo.value;
-    todoObject.month = monthTodo.value;
+    todoObject.date = dateTodo.value;
+   
     console.log(todoObject)
     listOfTodos.push(todoObject);
     console.log(listOfTodos)
-    //console.log(titleTodoValue, dateTodoValue, monthTodoValue);
-    addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue);
+
+    addTodoElementToList(titleTodoValue, dateTodoValue);
 
     titleTodo.value = "";
-    //Why not reseted to 1?
-    dateTodo.value = "1";
-    monthTodo.value ="Januari";
+    dateTodo.value = null;
 }
 
-function addTodoElementToList(titleTodoValue, dateTodoValue, monthTodoValue){
-    createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue)    
+function addTodoElementToList(titleTodoValue, dateTodoValue){
+    createTodoElement(titleTodoValue, dateTodoValue)    
 }
 
 
-function createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue){
+function createTodoElement(titleTodoValue, dateTodoValue){
     const ul = document.querySelector(".todoList");
     const li = document.createElement('li');
     const div1 = document.createElement('div');
@@ -100,7 +91,6 @@ function createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue){
     iconRemove.setAttribute("class", "fas fa-minus-circle removeTodoIcon")
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-
     const todoText = document.createElement('p');
     const todoDate = document.createElement('span');
 
@@ -108,22 +98,14 @@ function createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue){
     li.append(div1, div2);
     div1.append(checkbox, todoText);
     todoText.append(titleTodoValue, todoDate);
-    todoDate.append(dateTodoValue, monthTodoValue, iconEdit, iconRemove);
+    todoDate.append(dateTodoValue, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
 
-   iconRemove.addEventListener('click', removeTodo);
+    iconRemove.addEventListener('click', removeTodo);
 }
 
 
 function removeTodo(){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
- 
 }
-
-/**SHOWING RIGHT DATE - INPUT VALUES IN SELECTION **/
-
-
-
-
-
