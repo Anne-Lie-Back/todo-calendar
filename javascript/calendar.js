@@ -10,24 +10,29 @@ function calendarStart(){
     addDaysToCalendar(currentViewYear,currentViewMonth);
     //addDaysToCalendar(2020,1);
     document.querySelector('.calendar-container').addEventListener('click', event => {calendarDayClicked(event);});
-    //helgDagarAPI();
+    //helgDagarAPI(currentViewYear, currentViewMonth);
 }
 
 function addDaysToCalendar(setYear,setMonth){
     removeAllDays();//clear old month view.
-    console.log(setYear,setMonth);
+    //console.log(setYear,setMonth);
+
+    helgDagarAPI(setYear, setMonth)
+
     fillEmptyDays(getFirstWeekdayOfMonth(setYear,setMonth));
     for(let i = 0; i < getDaysInMonth(setYear,setMonth); i++){
         let makeDiv = document.createElement("div");
         makeDiv.className = "calendar-day";
         makeDiv.id = (i + 1 );
-        let makeText = document.createTextNode("abc  " + (i +1 ));
+        let makeText = document.createTextNode(" " + (i +1 ));
         makeDiv.appendChild(makeText);
         document.querySelector('.calendar-container').append(makeDiv);
     }
+
+    document.querySelector('.calendar-year').innerHTML = currentViewYear;//update year on top of calendar.
+    document.querySelector('.calendar-month').innerHTML = (currentViewMonth+1);//add one so december is month 12
     console.log("done days ");
-    //removeAllDays();
-    //getDaysInMonth();
+
 }
 
 //Fill empty days if month does not start on a monday.
@@ -35,7 +40,7 @@ function fillEmptyDays(nrOfEmptyDays){
     if(nrOfEmptyDays === 0){ //sunday is zero so set to 7.
         nrOfEmptyDays = 7;
     }
-    console.log('nr days '+nrOfEmptyDays);
+    //console.log('nr days '+nrOfEmptyDays);
     for(let i = 0; i < (nrOfEmptyDays-1); i++){
         let makeDiv = document.createElement('div');
         makeDiv.className = "empty-day";
@@ -61,14 +66,14 @@ function removeAllDays(){
 //what day of week to start adding calendar days.
 function getFirstWeekdayOfMonth(setYear,setMonth){
     let firstWeekday = new Date(setYear,setMonth, 1).getDay();
-    console.log(' first week day: '+firstWeekday);
+    //console.log(' first week day: '+firstWeekday);
     return firstWeekday;//0 is sunday, 1 is monday.
 }
 
 //How many days in current month to add to calendar.
 function getDaysInMonth(setYear,setMonth){
     let nrDaysInMonth = new Date(setYear, (setMonth+1), 0).getDate();//zero is last day of previous month
-    console.log('days ' + nrDaysInMonth);
+    //console.log('days ' + nrDaysInMonth);
     return nrDaysInMonth;
 }
 
@@ -114,11 +119,45 @@ function calendarDayClicked(event){
     
 }
 
-//API for holidays.
-async function helgDagarAPI(){
+//API for holidays. month 1 is january and 12 is december.
+async function helgDagarAPI(getYear,getMonth){
     //add try catch later. TODO.
     //new brach calendar-helgdagar.
-    const response = await fetch('https://api.dryg.net/dagar/v2.1/2019/11');
-    const jsonResponse = await response.json();
-    console.log(jsonResponse);
+    try {
+        const response = await fetch('https://api.dryg.net/dagar/v2.1/' + getYear+'/'+(getMonth+1)); //add one to month for js date starts at zero.
+        const jsonResponse = await response.json();
+        //console.log(jsonResponse);
+        //return jsonResponse;
+        addHelgAPIToCalendar(jsonResponse);
+    }
+    catch (error){
+        console.log(error);
+    }
+    
+}
+
+function helgAPI(getYear,getMonth){
+    fetch('https://api.dryg.net/dagar/v2.1/' + getYear+'/'+(getMonth+1)) //add one to month for js date starts at zero.
+        .then (function (response){
+            console.log(response.json());
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data.dagar);
+            return data.dagar;
+        })
+}
+
+//Add holiday text to calendar day div.
+function addHelgAPIToCalendar(helgMonth){
+    //console.log(helgMonth.dagar);
+    let listOfDays = document.querySelectorAll('.calendar-day');
+    for(let i = 0; i < Object.keys(helgMonth.dagar).length ; i++){
+        if(helgMonth.dagar[i].helgdag){
+
+            //console.log('day in month '+ i + ' ' + helgMonth.dagar[i].helgdag);
+            listOfDays[i].style.backgroundColor = 'red';
+            listOfDays[i].innerHTML += '<br>' + helgMonth.dagar[i].helgdag;
+        }
+    }
 }
