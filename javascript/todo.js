@@ -71,21 +71,24 @@ function gatherTodoInput(){
 
     const todos = getTodosFromLocalStorage();
     todos.push(todoObject);
+
+    addTodoElementToList(todoObject.title, todoObject.date);
     saveTodosToLocalStorage(todos);
-    //saveTodo(todoObject);
-    addTodoElementToList(titleTodoValue, dateTodoValue);
     
     titleTodo.value = "";
     dateTodo.value = null;
 }
 
 function addTodoElementToList(titleTodoValue, dateTodoValue){
-    createTodoElement(titleTodoValue, dateTodoValue)    
+    //createTodoElement(titleTodoValue, dateTodoValue);
+    const li = createTodoElement(titleTodoValue, dateTodoValue);
+    document.querySelector('.todoList').append(li);
+    
 }
 
 
 function createTodoElement(titleTodoValue, dateTodoValue){
-    const ul = document.querySelector(".todoList");
+    
     const li = document.createElement('li');
     const div1 = document.createElement('div');
     const div2 = document.createElement('div');
@@ -98,7 +101,6 @@ function createTodoElement(titleTodoValue, dateTodoValue){
     const todoText = document.createElement('p');
     const todoDate = document.createElement('span');
 
-    ul.append(li);
     li.append(div1, div2);
     div1.append(checkbox, todoText);
     todoText.append(titleTodoValue, todoDate);
@@ -107,7 +109,7 @@ function createTodoElement(titleTodoValue, dateTodoValue){
 
     iconRemove.addEventListener('click', removeTodo);
     
-    //return ul;
+    return li;
 }
 
 function removeTodo(){
