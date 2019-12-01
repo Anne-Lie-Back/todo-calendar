@@ -107,10 +107,12 @@ function createTodoElement(titleTodoValue, dateTodoValue, monthTodoValue){
     ul.append(li);
     li.append(div1, div2);
     div1.append(checkbox, todoText);
+    //Oskars >
+    todoText.setAttribute("class", "maximizeTextInTodo");
+    // <Oskars
     todoText.append(titleTodoValue, todoDate);
     todoDate.append(dateTodoValue, monthTodoValue, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
-
    iconRemove.addEventListener('click', removeTodo);
 }
 

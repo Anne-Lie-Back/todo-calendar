@@ -157,6 +157,30 @@ body{
    
 }
 
+input[type=checkbox]:checked + p {
+    text-decoration: line-through;
+  } 
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0.3rem;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgb(0,0,0);
+}
+
+/*Pillar inte mer ico ALs kod har något bättre att greppa första <p> med*/
+
+.maximizeTextInTodo{
+    text-overflow: ellipsis; 
+    display: block; 
+    overflow: hidden; 
+    white-space: nowrap;
+    width: 12rem; 
+}
+
+
 @media only screen and (min-width: 45em){
 
     .todoList{
