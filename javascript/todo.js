@@ -65,29 +65,28 @@ function gatherTodoInput(){
     todoObject.title = titleTodo.value;
     todoObject.date = dateTodo.value;
    
-    console.log(todoObject);
+    //console.log(todoObject);
     listOfTodos.push(todoObject);
-    console.log(listOfTodos);
+    //console.log(listOfTodos);
 
     const todos = getTodosFromLocalStorage();
     todos.push(todoObject);
 
-    addTodoElementToList(todoObject.title, todoObject.date);
+    addTodoElementToList(todoObject);
     saveTodosToLocalStorage(todos);
     
     titleTodo.value = "";
     dateTodo.value = null;
 }
 
-function addTodoElementToList(titleTodoValue, dateTodoValue){
+function addTodoElementToList(todoObject){
     //createTodoElement(titleTodoValue, dateTodoValue);
-    const li = createTodoElement(titleTodoValue, dateTodoValue);
-    document.querySelector('.todoList').append(li);
-    
+    const li = createTodoElement(todoObject);
+    document.querySelector('.todoList').append(li); 
 }
 
 
-function createTodoElement(titleTodoValue, dateTodoValue){
+function createTodoElement(todoObject){
     
     const li = document.createElement('li');
     const div1 = document.createElement('div');
@@ -103,8 +102,8 @@ function createTodoElement(titleTodoValue, dateTodoValue){
 
     li.append(div1, div2);
     div1.append(checkbox, todoText);
-    todoText.append(titleTodoValue, todoDate);
-    todoDate.append(dateTodoValue, iconEdit, iconRemove);
+    todoText.append(todoObject.title, todoDate);
+    todoDate.append(todoObject.date, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
 
     iconRemove.addEventListener('click', removeTodo);
@@ -121,12 +120,16 @@ function removeTodo(){
 
 /* ------LOCAL STORAGE HELPER FUNCTIONS------ */
 
-function saveTodo(todoObject){
-    // Get all saved todos from storage
+function loadTodos() {
+    // Get the DOM ul element and list of todos
+    const ul = document.querySelector('.todoList')
+    const todos = getTodosFromLocalStorage()
 
-
-    // Save the update todos list to storage
-    
+    // Iterate over each todo and add it to the DOM
+    for (const todo of todos) {
+        const li = createTodoElement(todo)
+        ul.append(li)
+    }
 }
 /**
  * Access the todos from local storage

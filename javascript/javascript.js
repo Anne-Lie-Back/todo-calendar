@@ -4,5 +4,6 @@ function init(){
     console.log('banan');
     calendarStart();
     addTodo();
+    loadTodos();
 }
 
