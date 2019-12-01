@@ -29,7 +29,7 @@ function showAndHideTodoInput(){
     }
 }
 
-function hideTodoInput(inputButton, inputFieldContainer, inputField){
+function hideTodoInput(inputButton, inputFieldContainer){
     inputButton.className = "fas fa-plus";
     inputFieldContainer.style.height = "2.5rem";
 }
@@ -61,16 +61,20 @@ function gatherTodoInput(){
 //TEACHER ADDED DISS
     //let currentDate = new Date()
 
-    let todoObject = {}
+    let todoObject = {};
     todoObject.title = titleTodo.value;
     todoObject.date = dateTodo.value;
    
-    console.log(todoObject)
+    console.log(todoObject);
     listOfTodos.push(todoObject);
-    console.log(listOfTodos)
+    console.log(listOfTodos);
 
+    const todos = getTodosFromLocalStorage();
+    todos.push(todoObject);
+    saveTodosToLocalStorage(todos);
+    //saveTodo(todoObject);
     addTodoElementToList(titleTodoValue, dateTodoValue);
-
+    
     titleTodo.value = "";
     dateTodo.value = null;
 }
@@ -102,10 +106,42 @@ function createTodoElement(titleTodoValue, dateTodoValue){
     div2.append(iconEdit, iconRemove);
 
     iconRemove.addEventListener('click', removeTodo);
+    
+    //return ul;
 }
-
 
 function removeTodo(){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
 }
+
+/***LOCAL STORAGE FUNCTIONS ***/
+
+/* ------LOCAL STORAGE HELPER FUNCTIONS------ */
+
+function saveTodo(todoObject){
+    // Get all saved todos from storage
+
+
+    // Save the update todos list to storage
+    
+}
+/**
+ * Access the todos from local storage
+ * @returns {Array<String>} list of todos
+ */
+function getTodosFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('todos')) || []
+}
+
+/**
+ * Save all todos to local storage
+ * @param {Array<String>} todos list of todos to be stored
+ */
+
+function saveTodosToLocalStorage(todos) {
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+
+
