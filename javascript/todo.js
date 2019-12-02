@@ -101,6 +101,7 @@ function createTodoElement(todoObject){
 
     li.append(div1, div2);
     div1.append(checkbox, todoText);
+    todoText.setAttribute("class", "maximizeTextInTodo");
     todoText.append(todoObject.title, todoDate);
     todoDate.append(todoObject.date, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);

@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="./css/calendar-container.css">
     <link rel="stylesheet" href="./css/todo.css">
     <script src="https://kit.fontawesome.com/165da34037.js" crossorigin="anonymous"></script>
-    <script src="./javascript/todo.js"></script>
-    <script src="./javascript/javascript.js"></script>
-    <script src="javascript/calendar.js"></script>
-    <script src="javascript/clock.js"></script>
+    <script defer src="./javascript/todo.js"></script>
+    <script defer src="./javascript/javascript.js"></script>
+    <script defer src="javascript/calendar.js"></script>
+    <script defer src="javascript/clock.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
     <title>TODO</title>
 </head>
@@ -56,20 +56,21 @@
         </div>
     </aside>
 <div class="calendar-container">
-        <div class="calendar-top" onclick="prevMonth()">Previous</div>
+        <div class="calendar-top" onclick="prevMonth()"><i class="fas fa-arrow-circle-left"></i></i></div>
         <div class="calendar-top"></div>
         <div class="calendar-top calendar-year">2019</div>
         <div class="calendar-top"></div>
         <div class="calendar-top calendar-month">12</div>
         <div class="calendar-top"></div>
-        <div class="calendar-top" onclick="nextMonth()">Next</div>
-        <div class="calendar-header">Monday</div>
-        <div class="calendar-header">Tuesday</div>
-        <div class="calendar-header">Wednesday</div>
-        <div class="calendar-header">Thursday</div>
-        <div class="calendar-header">Friday</div>
-        <div class="calendar-header">Saturday</div>
-        <div class="calendar-header">Sunday</div>
+        <div class="calendar-top" onclick="nextMonth()"><i class="fas fa-arrow-circle-right"></i></i></div>
+        <div class="calendar-header">Mån<span>dag</span> <br> --Okt</div>
+        <div class="calendar-header">Tis<span>dag</span></div>
+        <div class="calendar-header">Ons<span>dag</span></div>
+        <div class="calendar-header">Tors<span>dag</span></div>
+        <div class="calendar-header">Fre<span>dag</span></div>
+        <div class="calendar-header">Lör<span>dag</span></div>
+        <div class="calendar-header">Sön<span>dag</span> <br> Dec--</div>
+
     </div>
 </body>
 </html>
