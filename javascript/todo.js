@@ -1,4 +1,4 @@
-let listOfTodos = [];
+//let listOfTodos = [];
 
 function addTodo(){
     const addTodoButton = document.querySelector(".addTodoButton");
@@ -10,7 +10,7 @@ function addTodo(){
 /**
  * *************SHOWING AND HIDING INPUT FIELD***************
  */
-//PUT IN FUNCTION LATER!!! No locals pls
+
 let inputShown = false;
 
 function showAndHideTodoInput(){
@@ -49,24 +49,23 @@ function initAddTodoToList(){
     addWrittenTodo.addEventListener('click', gatherTodoInput);
 }
 
-/****** PUT IN FUNCTION! NOT GLOBAL PLS (ONLY GLOBAL FOR TESTING) **/
-
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
     
-    let dateTodoValue = dateTodo.value;
-    let titleTodoValue = titleTodo.value;
-    
 //TEACHER ADDED DISS
     //let currentDate = new Date()
 
-    let todoObject = {};
+    let todoObject = {
+        "title": titleTodo.value,
+        "date": dateTodo.value
+        }
+/*     let todoObject = {};
     todoObject.title = titleTodo.value;
-    todoObject.date = dateTodo.value;
+    todoObject.date = dateTodo.value; */
    
     //console.log(todoObject);
-    listOfTodos.push(todoObject);
+    //listOfTodos.push(todoObject);
     //console.log(listOfTodos);
 
     const todos = getTodosFromLocalStorage();
@@ -105,15 +104,43 @@ function createTodoElement(todoObject){
     todoText.append(todoObject.title, todoDate);
     todoDate.append(todoObject.date, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
-
-    iconRemove.addEventListener('click', removeTodo);
+    
+    iconRemove.addEventListener('click', function() { removeTodo(todoObject) })
     
     return li;
 }
 
-function removeTodo(){
+function removeTodo(todoObject){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
+    
+    //How do i make the spliceing work? SADNESSSSS!
+
+    //todoObject = event.target.nextSibling.textContent
+    removeTodoFromLocalStorage(todoObject)
+}
+
+function removeTodoFromLocalStorage(todoObject){
+    // Get all saved todos from storage
+   
+    const todos = getTodosFromLocalStorage()
+    console.log(todoObject)
+    // Remove the todo from the list
+    let index = -1
+    for (let i = 0; i < todos.length; i++) {
+        const storedTodo = todos[i];
+        if(storedTodo.title == todoObject.title){
+            index = i;
+            break
+        }
+    }
+
+    console.log(index);
+    //DOESN*T SPLICE AS WANTED!
+    todos.splice(index, 1)
+    console.log(todos)
+    // Save the update todos list to storage
+    saveTodosToLocalStorage(todos)
 }
 
 /***LOCAL STORAGE FUNCTIONS ***/
@@ -131,12 +158,14 @@ function loadTodos() {
         ul.append(li)
     }
 }
+
 /**
  * Access the todos from local storage
  * @returns {Array<String>} list of todos
  */
 function getTodosFromLocalStorage() {
     return JSON.parse(localStorage.getItem('todos')) || []
+    
 }
 
 /**
