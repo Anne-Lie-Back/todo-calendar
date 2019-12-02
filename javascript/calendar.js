@@ -3,7 +3,6 @@ let currentViewMonth;
 let clickedDayObject = {year: 0, month:0, day:0};
 
 function calendarStart(){
-    console.log('Calendar Start2.')
     currentViewYear = new Date().getFullYear();
     currentViewMonth = new Date().getMonth();
     console.log(currentViewYear,currentViewMonth);
@@ -20,6 +19,22 @@ function addDaysToCalendar(setYear,setMonth){
     helgDagarAPI(setYear, setMonth)
 
     fillEmptyDays(getFirstWeekdayOfMonth(setYear,setMonth));
+
+    addDayDivsToMonth(setYear, setMonth);
+
+    changeCalendarYearMonthName(setYear,setMonth);
+    console.log("done days ");
+    fillLastEmptyDays();
+
+    console.log(getTodosFromLocalStorage())
+    console.log('local ')
+
+    updateCalendarTodo();
+
+}
+
+//fill day divs in calendar-container.
+function addDayDivsToMonth(setYear, setMonth){
     for(let i = 0; i < getDaysInMonth(setYear,setMonth); i++){
         let makeDiv = document.createElement("div");
         makeDiv.className = "calendar-day";
@@ -28,14 +43,6 @@ function addDaysToCalendar(setYear,setMonth){
         makeDiv.appendChild(makeText);
         document.querySelector('.calendar-container').append(makeDiv);
     }
-
-    //document.querySelector('.calendar-year').innerHTML = currentViewYear;//update year on top of calendar.
-    //document.querySelector('.calendar-month').innerHTML = (currentViewMonth+1);//add one so december is month 12
-    changeCalendarYearMonthName(setYear,setMonth);
-    console.log("done days ");
-    fillLastEmptyDays();
-
-
 }
 
 //Fill empty days if month does not start on a monday.
@@ -138,9 +145,11 @@ function calendarDayClicked(event){
         clickedDayObject.month = currentViewMonth; // zero is january, 11 is december.
         clickedDayObject.day = Number(event.target.id); //day of month.
         console.log(clickedDayObject);
+
+        //anneLie(clickedDayObject);
     }
     else{
-        console.log(event.target.className);
+        //console.log(event.target.className);
     }
     
 }
@@ -187,4 +196,40 @@ function addHelgAPIToCalendar(helgMonth){
             listOfDays[i].innerHTML += '<br>' + helgMonth.dagar[i].helgdag;
         }
     }
+}
+
+function updateCalendarTodo(){
+    let listOfDays = document.querySelectorAll('.calendar-day');
+    let todoList = getTodosFromLocalStorage();
+    
+    for(let dayDiv of listOfDays){
+        let paddedMonth;
+        let paddedDay;
+        let todoNrOnDay = 0;
+        if(currentViewMonth <= 8){
+            paddedMonth = '0' + (currentViewMonth+1);//from month 11 is dec to month 12.
+        }
+        else{
+            paddedMonth = (currentViewMonth+1);
+        }
+
+        if(dayDiv.id <= 9){
+            paddedDay = '0' + dayDiv.id;
+        }
+        else{
+            paddedDay = dayDiv.id
+        }
+        let paddedDate = currentViewYear + '-' + paddedMonth + '-' + paddedDay;
+        //console.log(paddedDate + ' padded');
+        
+        for(let todo of todoList){
+            if(todo.date == paddedDate){
+                todoNrOnDay ++;
+            }
+        }
+        if(todoNrOnDay != 0){
+            console.log(todoNrOnDay + ' todoNr ' + paddedDate)
+        }
+    }
+
 }
