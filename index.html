@@ -42,39 +42,7 @@
                     <div class="hideInputText">
                         <input type="text" id="titleTodo" placeholder="What todo?">
                         <div class ="inputDate">
-                            <select id ="inputDate">
-                                
-                                <option value=" 1 ">1</option>
-                                <option value=" 2 ">2</option>
-                                <option value=" 3 ">3</option>
-                                <option value=" 4 ">4</option>
-                                <option value=" 5 ">5</option>
-                                <option value=" 6 ">6</option>
-                                <option value=" 7 ">7</option>
-                                <option value=" 8 ">8</option>
-                                <option value=" 9 ">9</option>
-                                <option value=" 10 ">10</option>
-                                <option value=" 11 ">11</option>
-                                <option value=" 12 ">12</option>
-                                <option value=" 13 ">13</option>
-                                <option value=" 14 ">14</option>
-                                <option value=" 15 ">15</option>
-                            
-                            </select>
-                            <select id ="inputMonth">
-                                <option value="Januari">Januari</option>
-                                <option value="Februari">Februari</option>
-                                <option value="Mars">Mars</option>
-                                <option value="April">April</option>
-                                <option value="Maj">Maj</option>
-                                <option value="Juni">Juni</option>
-                                <option value="Juli">Juli</option>
-                                <option value="Augusti">Augusti</option>
-                                <option value="September">September</option>
-                                <option value="Oktober">Oktober</option>
-                                <option value="November">November</option>
-                                <option value="December">December</option>
-                            </select>
+                            <input type="date" id="inputDate" min="2019-11-01">
                             <button id="addWrittenTodo">
                                 <i class="fas fa-check"></i> 
                             </button>
@@ -90,9 +58,9 @@
 <div class="calendar-container">
         <div class="calendar-top" onclick="prevMonth()"><i class="fas fa-arrow-circle-left"></i></i></div>
         <div class="calendar-top"></div>
-        <div class="calendar-top">2019</div>
+        <div class="calendar-top calendar-year">2019</div>
         <div class="calendar-top"></div>
-        <div class="calendar-top">Nov</div>
+        <div class="calendar-top calendar-month">12</div>
         <div class="calendar-top"></div>
         <div class="calendar-top" onclick="nextMonth()"><i class="fas fa-arrow-circle-right"></i></i></div>
         <div class="calendar-header">Mån<span>dag</span> <br> --Okt</div>
@@ -102,6 +70,7 @@
         <div class="calendar-header">Fre<span>dag</span></div>
         <div class="calendar-header">Lör<span>dag</span></div>
         <div class="calendar-header">Sön<span>dag</span> <br> Dec--</div>
+
     </div>
 </body>
 </html>
