@@ -1,4 +1,4 @@
-let listOfTodos = [];
+//let listOfTodos = [];
 
 function addTodo(){
     const addTodoButton = document.querySelector(".addTodoButton");
@@ -10,7 +10,7 @@ function addTodo(){
 /**
  * *************SHOWING AND HIDING INPUT FIELD***************
  */
-//PUT IN FUNCTION LATER!!! No locals pls
+
 let inputShown = false;
 
 function showAndHideTodoInput(){
@@ -29,7 +29,7 @@ function showAndHideTodoInput(){
     }
 }
 
-function hideTodoInput(inputButton, inputFieldContainer, inputField){
+function hideTodoInput(inputButton, inputFieldContainer){
     inputButton.className = "fas fa-plus";
     inputFieldContainer.style.height = "2.5rem";
 }
@@ -49,39 +49,44 @@ function initAddTodoToList(){
     addWrittenTodo.addEventListener('click', gatherTodoInput);
 }
 
-/****** PUT IN FUNCTION! NOT GLOBAL PLS (ONLY GLOBAL FOR TESTING) **/
-
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
     
-    let dateTodoValue = dateTodo.value;
-    let titleTodoValue = titleTodo.value;
-    
 //TEACHER ADDED DISS
     //let currentDate = new Date()
 
-    let todoObject = {}
+    let todoObject = {
+        "title": titleTodo.value,
+        "date": dateTodo.value
+        }
+/*     let todoObject = {};
     todoObject.title = titleTodo.value;
-    todoObject.date = dateTodo.value;
+    todoObject.date = dateTodo.value; */
    
-    console.log(todoObject)
-    listOfTodos.push(todoObject);
-    console.log(listOfTodos)
+    //console.log(todoObject);
+    //listOfTodos.push(todoObject);
+    //console.log(listOfTodos);
 
-    addTodoElementToList(titleTodoValue, dateTodoValue);
+    const todos = getTodosFromLocalStorage();
+    todos.push(todoObject);
 
+    addTodoElementToList(todoObject);
+    saveTodosToLocalStorage(todos);
+    
     titleTodo.value = "";
     dateTodo.value = null;
 }
 
-function addTodoElementToList(titleTodoValue, dateTodoValue){
-    createTodoElement(titleTodoValue, dateTodoValue)    
+function addTodoElementToList(todoObject){
+    //createTodoElement(titleTodoValue, dateTodoValue);
+    const li = createTodoElement(todoObject);
+    document.querySelector('.todoList').append(li); 
 }
 
 
-function createTodoElement(titleTodoValue, dateTodoValue){
-    const ul = document.querySelector(".todoList");
+function createTodoElement(todoObject){
+    
     const li = document.createElement('li');
     const div1 = document.createElement('div');
     const div2 = document.createElement('div');
@@ -94,18 +99,83 @@ function createTodoElement(titleTodoValue, dateTodoValue){
     const todoText = document.createElement('p');
     const todoDate = document.createElement('span');
 
-    ul.append(li);
     li.append(div1, div2);
     div1.append(checkbox, todoText);
-    todoText.append(titleTodoValue, todoDate);
-    todoDate.append(dateTodoValue, iconEdit, iconRemove);
+    todoText.append(todoObject.title, todoDate);
+    todoDate.append(todoObject.date, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
-
-    iconRemove.addEventListener('click', removeTodo);
+    
+    iconRemove.addEventListener('click', function() { removeTodo(todoObject) })
+    
+    return li;
 }
 
-
-function removeTodo(){
+function removeTodo(todoObject){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
+    
+    //How do i make the spliceing work? SADNESSSSS!
+
+    //todoObject = event.target.nextSibling.textContent
+    removeTodoFromLocalStorage(todoObject)
 }
+
+function removeTodoFromLocalStorage(todoObject){
+    // Get all saved todos from storage
+   
+    const todos = getTodosFromLocalStorage()
+    console.log(todoObject)
+    // Remove the todo from the list
+    let index = -1
+    for (let i = 0; i < todos.length; i++) {
+        const storedTodo = todos[i];
+        if(storedTodo.title == todoObject.title){
+            index = i;
+            break
+        }
+    }
+
+    console.log(index);
+    //DOESN*T SPLICE AS WANTED!
+    todos.splice(index, 1)
+    console.log(todos)
+    // Save the update todos list to storage
+    saveTodosToLocalStorage(todos)
+}
+
+/***LOCAL STORAGE FUNCTIONS ***/
+
+/* ------LOCAL STORAGE HELPER FUNCTIONS------ */
+
+function loadTodos() {
+    // Get the DOM ul element and list of todos
+    const ul = document.querySelector('.todoList')
+    const todos = getTodosFromLocalStorage()
+
+    // Iterate over each todo and add it to the DOM
+    for (const todo of todos) {
+        const li = createTodoElement(todo)
+        ul.append(li)
+    }
+}
+
+/**
+ * Access the todos from local storage
+ * @returns {Array<String>} list of todos
+ */
+function getTodosFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('todos')) || []
+    
+}
+
+/**
+ * Save all todos to local storage
+ * @param {Array<String>} todos list of todos to be stored
+ */
+
+function saveTodosToLocalStorage(todos) {
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+
+
