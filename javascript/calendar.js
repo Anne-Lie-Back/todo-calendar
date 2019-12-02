@@ -29,9 +29,12 @@ function addDaysToCalendar(setYear,setMonth){
         document.querySelector('.calendar-container').append(makeDiv);
     }
 
-    document.querySelector('.calendar-year').innerHTML = currentViewYear;//update year on top of calendar.
-    document.querySelector('.calendar-month').innerHTML = (currentViewMonth+1);//add one so december is month 12
+    //document.querySelector('.calendar-year').innerHTML = currentViewYear;//update year on top of calendar.
+    //document.querySelector('.calendar-month').innerHTML = (currentViewMonth+1);//add one so december is month 12
+    changeCalendarYearMonthName(setYear,setMonth);
     console.log("done days ");
+    fillLastEmptyDays();
+
 
 }
 
@@ -48,6 +51,22 @@ function fillEmptyDays(nrOfEmptyDays){
     }
 }
 
+//fill rest of calendar empty days.
+function fillLastEmptyDays(){
+    let restDays = (document.querySelectorAll('.calendar-day').length + document.querySelectorAll('.empty-day').length) % 7;
+
+    restDays = 7 - restDays;
+    //console.log(restDays);
+    if(restDays < 7){
+        for(let i = 0; i < (restDays); i++){
+            //console.log(' loop ' +  i);
+            let makeDiv = document.createElement('div');
+            makeDiv.className = "empty-day";
+            document.querySelector('.calendar-container').appendChild(makeDiv);
+        }        
+    }
+}
+
 //Remove all calendar days for next month.
 function removeAllDays(){
     const allDaysList = document.querySelectorAll('.calendar-day');
@@ -61,6 +80,13 @@ function removeAllDays(){
         emptyDay.remove();
     }
     //console.log(allDaysList , emptyDaysList);
+}
+
+function changeCalendarYearMonthName(setYear,setMonth){
+
+    const monthName = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+    document.querySelector('.calendar-year').innerHTML = setYear;//update year on top of calendar.
+    document.querySelector('.calendar-month').innerHTML = monthName[setMonth];//add one so december is month 12
 }
 
 //what day of week to start adding calendar days.
@@ -156,7 +182,8 @@ function addHelgAPIToCalendar(helgMonth){
         if(helgMonth.dagar[i].helgdag){
 
             //console.log('day in month '+ i + ' ' + helgMonth.dagar[i].helgdag);
-            listOfDays[i].style.backgroundColor = 'red';
+            //listOfDays[i].style.backgroundColor = 'red';
+            listOfDays[i].classList.add('holiday');
             listOfDays[i].innerHTML += '<br>' + helgMonth.dagar[i].helgdag;
         }
     }
