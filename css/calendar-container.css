@@ -62,6 +62,7 @@
 
     .dayHolidayDiv{
         overflow: hidden;
+        text-overflow: ellipsis;
         background-color: wheat;
     }
 

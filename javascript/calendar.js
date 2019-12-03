@@ -5,11 +5,12 @@ let clickedDayObject = {year: 0, month:0, day:0};
 function calendarStart(){
     currentViewYear = new Date().getFullYear();
     currentViewMonth = new Date().getMonth();
-    console.log(currentViewYear,currentViewMonth);
+    //console.log(currentViewYear,currentViewMonth);
     addDaysToCalendar(currentViewYear,currentViewMonth);
     //addDaysToCalendar(2020,1);
     document.querySelector('.calendar-container').addEventListener('click', event => {calendarDayClicked(event);});
     //helgDagarAPI(currentViewYear, currentViewMonth);
+    document.querySelector('.todoContainer').addEventListener('click', event => {todoClick(event);});
 }
 
 function addDaysToCalendar(setYear,setMonth){
@@ -23,11 +24,11 @@ function addDaysToCalendar(setYear,setMonth){
     addDayDivsToMonth(setYear, setMonth);
 
     changeCalendarYearMonthName(setYear,setMonth);
-    console.log("done days ");
+    //console.log("done days ");
     fillLastEmptyDays();
 
-    console.log(getTodosFromLocalStorage())
-    console.log('local ')
+    //console.log(getTodosFromLocalStorage())
+    //console.log('local ')
 
     updateCalendarTodo();
 
@@ -129,7 +130,7 @@ function nextMonth(){
         currentViewMonth++;
     }
     
-    console.log('current year month view: '+currentViewYear + currentViewMonth);
+    //console.log('current year month view: '+currentViewYear + currentViewMonth);
     addDaysToCalendar(currentViewYear,currentViewMonth);
 }
 
@@ -142,7 +143,7 @@ function prevMonth(){
     else{
         currentViewMonth--;
     }
-    console.log('current year month view: '+currentViewYear + currentViewMonth);
+    //console.log('current year month view: '+currentViewYear + currentViewMonth);
     addDaysToCalendar(currentViewYear,currentViewMonth);
 }
 
@@ -183,11 +184,11 @@ async function helgDagarAPI(getYear,getMonth){
 function helgAPI(getYear,getMonth){
     fetch('https://api.dryg.net/dagar/v2.1/' + getYear+'/'+(getMonth+1)) //add one to month for js date starts at zero.
         .then (function (response){
-            console.log(response.json());
+            //console.log(response.json());
             return response.json();
         })
         .then(function(data) {
-            console.log(data.dagar);
+            //console.log(data.dagar);
             return data.dagar;
         })
 }
@@ -208,10 +209,14 @@ function addHelgAPIToCalendar(helgMonth){
     }
 }
 
+
+//Get todo's saved in local storage from todo.js and adds them to calendar days as a number.
 function updateCalendarTodo(){
     let listOfDays = document.querySelectorAll('.calendar-day');
     let todoList = getTodosFromLocalStorage();
     
+    //loop over all days in calendar.
+    //add a zero to month or day if less then 9 becomes 09.
     for(let dayDiv of listOfDays){
         let paddedMonth;
         let paddedDay;
@@ -232,15 +237,37 @@ function updateCalendarTodo(){
         let paddedDate = currentViewYear + '-' + paddedMonth + '-' + paddedDay;
         //console.log(paddedDate + ' padded');
         
+        //loop over all days in local storage todo to see how many there are in a day.
         for(let todo of todoList){
             if(todo.date == paddedDate){
                 todoNrOnDay ++;
             }
         }
+
+        //Add number of todo's in todoDiv.
         if(todoNrOnDay != 0){
-            console.log(todoNrOnDay + ' todoNr ' + paddedDate);
+            //console.log(todoNrOnDay + ' todoNr ' + paddedDate);
             dayDiv.querySelector(".dayTodoDiv").innerHTML = todoNrOnDay;
+        }
+        else{
+            dayDiv.querySelector(".dayTodoDiv").innerHTML = "";
         }
     }
 
+}
+
+//Event listeners from todo.js when remove, add buttons are clicked.
+//Updates calendar todo number. 
+function todoClick(event){
+    //console.log(event.target.className);
+    //console.log(event.target.id);
+    if(event.target.className == 'fas fa-minus-circle removeTodoIcon'){
+        //console.log('remove button clicked');
+        updateCalendarTodo();
+    }
+
+    if(event.target.className == 'fas fa-check' || event.target.id == "addWrittenTodo"){
+        //console.log('add clicked');
+        updateCalendarTodo();
+    }
 }
