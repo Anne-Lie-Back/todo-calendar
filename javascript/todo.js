@@ -3,9 +3,7 @@
 function addTodo(){
     const addTodoButton = document.querySelector(".addTodoButton");
     addTodoButton.addEventListener('click', showAndHideTodoInput);
-    initAddTodoToList()
 }
-
 
 /**
  * *************SHOWING AND HIDING INPUT FIELD***************
@@ -21,11 +19,12 @@ function showAndHideTodoInput(){
     if (inputShown){
         hideTodoInput(inputButton, inputFieldContainer, inputField)
         inputShown = false;
+        initAddTodoToList()
     }
-
     else{
         showTodoInput(inputButton, inputFieldContainer, inputField);
         inputShown = true;
+        initAddTodoToList()
     }
 }
 
@@ -43,16 +42,25 @@ function showTodoInput (inputButton, inputFieldContainer, inputField){
 /***
  * ************ ACTUALLY ADDING TODO ********
  */
+let editTodoChosen = false;
 
 function initAddTodoToList(){
     const addWrittenTodo = document.querySelector("#addWrittenTodo");
+
+    if(editTodoChosen){
+        addWrittenTodo.addEventListener('click', gatherTodoInput);
+        console.log('sending to edit')
+    }
+    
+    else{
     addWrittenTodo.addEventListener('click', gatherTodoInput);
+    console.log('sending to local')
+    }
 }
 
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
-    
 //TEACHER ADDED DISS
     //let currentDate = new Date()
 
@@ -107,6 +115,7 @@ function createTodoElement(todoObject){
     div2.append(iconEdit, iconRemove);
     
     iconRemove.addEventListener('click', function() { removeTodo(todoObject) })
+    iconEdit.addEventListener('click', function(){editTodo(todoObject)})
     
     return li;
 }
@@ -114,10 +123,6 @@ function createTodoElement(todoObject){
 function removeTodo(todoObject){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
-    
-    //How do i make the spliceing work? SADNESSSSS!
-
-    //todoObject = event.target.nextSibling.textContent
     removeTodoFromLocalStorage(todoObject)
 }
 
@@ -144,9 +149,58 @@ function removeTodoFromLocalStorage(todoObject){
     saveTodosToLocalStorage(todos)
 }
 
-/***LOCAL STORAGE FUNCTIONS ***/
+/****** EDIT TODO FUNCTIONS ****/
 
-/* ------LOCAL STORAGE HELPER FUNCTIONS------ */
+
+
+function editTodo(todoObject){
+
+    showAndHideTodoInput()
+    
+    editTodoChosen = true;
+    console.log
+    const titleTodo = document.querySelector("#titleTodo");
+    const dateTodo = document.querySelector("#inputDate");
+    titleTodo.value = todoObject.title;
+    dateTodo.value = todoObject.date;
+
+/*     const editDiv = document.createElement('div');
+    const lineBreak = document.createElement('br');
+    editDiv.setAttribute("class", "editDiv");
+    const divTitle = document.createElement('div');
+    const divDateAndConfirm = document.createElement('div');
+    const inputTitle = document.createElement('input');
+    inputTitle.type = 'text';
+    const inputDate = document.createElement('input');
+    inputDate.type = 'date';
+
+    const iconConfirm = document.createElement('i');
+    iconConfirm.setAttribute("class", "fas fa-check");
+    li.append(lineBreak);
+    lineBreak.append(editDiv);
+    editDiv.append(divTitle, divDateAndConfirm);
+    divTitle.append(inputTitle);
+    divDateAndConfirm.append(inputDate, iconConfirm);
+    console.log('show editable inputfield')
+    showEditDiv()
+
+    if (showEditTodo){
+        editDiv.style.height = 'none';
+        showEditTodo = false;
+        console.log(showEditTodo)
+    }
+
+    else{
+        editDiv.style.display = 'flex';
+        showEditTodo = true;
+        console.log(showEditTodo)
+    }
+    return li; */
+}
+
+
+
+/***LOCAL STORAGE FUNCTIONS ***/
 
 function loadTodos() {
     // Get the DOM ul element and list of todos

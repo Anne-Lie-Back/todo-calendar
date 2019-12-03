@@ -47,6 +47,12 @@ body{
     height:22rem;
 }
 
+/*edit experiment*/
+.todoList ul{
+    display:flex;
+    flex-direction:column;
+}
+
 .todoList li{
     padding: 0.5rem 1rem;
     border-bottom: 0.15rem solid black;
@@ -185,7 +191,6 @@ input[type=checkbox]:checked + p {
     white-space: nowrap;
     width: 12rem; 
 }
-
 
 @media only screen and (min-width: 45em){
 
