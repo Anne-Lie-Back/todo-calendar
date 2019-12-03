@@ -37,10 +37,19 @@ function addDaysToCalendar(setYear,setMonth){
 function addDayDivsToMonth(setYear, setMonth){
     for(let i = 0; i < getDaysInMonth(setYear,setMonth); i++){
         let makeDiv = document.createElement("div");
+        let makeDayNrDiv = document.createElement("div"); //new
+        let makeDayTodoDiv = document.createElement("div"); //new
+        let makeHolidayDiv = document.createElement("div"); //new
         makeDiv.className = "calendar-day";
+        makeDayNrDiv.className = "dayNrDiv"; //new
+        makeDayTodoDiv.className = "dayTodoDiv"; //new
+        makeHolidayDiv.className = "dayHolidayDiv"; //new
         makeDiv.id = (i + 1 );
         let makeText = document.createTextNode(" " + (i +1 ));
-        makeDiv.appendChild(makeText);
+        makeDayNrDiv.appendChild(makeText); //new
+        makeDiv.appendChild(makeDayNrDiv);
+        makeDiv.appendChild(makeDayTodoDiv);
+        makeDiv.appendChild(makeHolidayDiv);
         document.querySelector('.calendar-container').append(makeDiv);
     }
 }
@@ -77,7 +86,7 @@ function fillLastEmptyDays(){
 //Remove all calendar days for next month.
 function removeAllDays(){
     const allDaysList = document.querySelectorAll('.calendar-day');
-    const emptyDaysList = document.querySelectorAll('.empty-day')
+    const emptyDaysList = document.querySelectorAll('.empty-day');
     //console.log(allDaysList , emptyDaysList);
     for(let day of allDaysList){
         day.remove();
@@ -193,7 +202,8 @@ function addHelgAPIToCalendar(helgMonth){
             //console.log('day in month '+ i + ' ' + helgMonth.dagar[i].helgdag);
             //listOfDays[i].style.backgroundColor = 'red';
             listOfDays[i].classList.add('holiday');
-            listOfDays[i].innerHTML += '<br>' + helgMonth.dagar[i].helgdag;
+            //listOfDays[i].innerHTML += '<br>' + helgMonth.dagar[i].helgdag;
+            listOfDays[i].querySelector(".dayHolidayDiv").innerHTML = helgMonth.dagar[i].helgdag;
         }
     }
 }
@@ -217,7 +227,7 @@ function updateCalendarTodo(){
             paddedDay = '0' + dayDiv.id;
         }
         else{
-            paddedDay = dayDiv.id
+            paddedDay = dayDiv.id;
         }
         let paddedDate = currentViewYear + '-' + paddedMonth + '-' + paddedDay;
         //console.log(paddedDate + ' padded');
@@ -228,7 +238,8 @@ function updateCalendarTodo(){
             }
         }
         if(todoNrOnDay != 0){
-            console.log(todoNrOnDay + ' todoNr ' + paddedDate)
+            console.log(todoNrOnDay + ' todoNr ' + paddedDate);
+            dayDiv.querySelector(".dayTodoDiv").innerHTML = todoNrOnDay;
         }
     }
 

@@ -45,11 +45,24 @@
         padding: 0.3rem;
         background-color: white;
         display: flex;
-        justify-content: flex-end;
+        flex-direction: column;
+        /*justify-content: flex-end;*/
     }
 
     .empty-day{
         background-color: white;
+    }
+
+    .dayTodoDiv{
+        background-color: yellow;
+        width: 1.4rem;
+        border-radius: 1rem;
+        text-align: center;
+    }
+
+    .dayHolidayDiv{
+        overflow: hidden;
+        background-color: wheat;
     }
 
 
