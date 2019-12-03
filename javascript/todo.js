@@ -1,8 +1,10 @@
-//let listOfTodos = [];
+let listOfTodos = [getTodosFromLocalStorage()];
+console.log(listOfTodos)
 
 function addTodo(){
     const addTodoButton = document.querySelector(".addTodoButton");
     addTodoButton.addEventListener('click', showAndHideTodoInput);
+    initAddTodoToList()
 }
 
 /**
@@ -19,12 +21,10 @@ function showAndHideTodoInput(){
     if (inputShown){
         hideTodoInput(inputButton, inputFieldContainer, inputField)
         inputShown = false;
-        initAddTodoToList()
     }
     else{
         showTodoInput(inputButton, inputFieldContainer, inputField);
         inputShown = true;
-        initAddTodoToList()
     }
 }
 
@@ -46,16 +46,8 @@ let editTodoChosen = false;
 
 function initAddTodoToList(){
     const addWrittenTodo = document.querySelector("#addWrittenTodo");
-
-    if(editTodoChosen){
-        addWrittenTodo.addEventListener('click', gatherTodoInput);
-        console.log('sending to edit')
-    }
-    
-    else{
     addWrittenTodo.addEventListener('click', gatherTodoInput);
-    console.log('sending to local')
-    }
+
 }
 
 function gatherTodoInput(){
@@ -77,14 +69,39 @@ function gatherTodoInput(){
     //console.log(listOfTodos);
 
     const todos = getTodosFromLocalStorage();
+    if(!editTodoChosen){
+    listOfTodos.push(todoObject);
     todos.push(todoObject);
-
+    console.log('sparas i local')
     addTodoElementToList(todoObject);
     saveTodosToLocalStorage(todos);
+    }
+
+    else{
+        updateEditTodo(todoObject)
+        editTodoChosen = false;
+        console.log(todoObject)
+    }
     
     titleTodo.value = "";
     dateTodo.value = null;
 }
+
+function editTodo(todoObject){
+
+    showAndHideTodoInput()
+    editTodoChosen = true;
+    console.log
+    const titleTodo = document.querySelector("#titleTodo");
+    const dateTodo = document.querySelector("#inputDate");
+    titleTodo.value = todoObject.title;
+    dateTodo.value = todoObject.date;
+}
+
+function updateEditTodo(todoObject){
+console.log(listOfTodos)
+}
+
 
 function addTodoElementToList(todoObject){
     //createTodoElement(titleTodoValue, dateTodoValue);
@@ -153,16 +170,7 @@ function removeTodoFromLocalStorage(todoObject){
 
 
 
-function editTodo(todoObject){
 
-    showAndHideTodoInput()
-    
-    editTodoChosen = true;
-    console.log
-    const titleTodo = document.querySelector("#titleTodo");
-    const dateTodo = document.querySelector("#inputDate");
-    titleTodo.value = todoObject.title;
-    dateTodo.value = todoObject.date;
 
 /*     const editDiv = document.createElement('div');
     const lineBreak = document.createElement('br');
@@ -196,9 +204,6 @@ function editTodo(todoObject){
         console.log(showEditTodo)
     }
     return li; */
-}
-
-
 
 /***LOCAL STORAGE FUNCTIONS ***/
 
