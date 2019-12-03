@@ -4,5 +4,6 @@ function init(){
     calendarStart();
     loadTodos();
     addTodo();
+    resizesTodoList();
 }
 

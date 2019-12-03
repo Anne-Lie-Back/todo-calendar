@@ -180,3 +180,16 @@ function saveTodosToLocalStorage(todos) {
 
 
 
+//resizes todo list
+window.addEventListener('resize', resizesTodoList)
+
+function resizesTodoList() {
+    const todoList = document.querySelector(".todoList");
+    if(window.innerWidth > 720){
+        let setTodoListHeight = String(window.innerHeight - 325) + "px";
+        todoList.style.height = setTodoListHeight;
+    } else {
+        let setTodoListHeight = String(window.innerHeight - 232) + "px";
+        todoList.style.height = setTodoListHeight;
+    }
+}
