@@ -17,6 +17,8 @@ function showAndHideTodoInput(){
     const inputFieldContainer = document.querySelector(".slideInputText");
     const inputField = document.querySelector(".hideInputText");
     const inputButton = document.querySelector(".addTodoButton i");
+    const titleTodo = document.querySelector("#titleTodo");
+    const dateTodo = document.querySelector("#inputDate");
     
     if (inputShown){
         hideTodoInput(inputButton, inputFieldContainer, inputField)
@@ -25,18 +27,26 @@ function showAndHideTodoInput(){
     else{
         showTodoInput(inputButton, inputFieldContainer, inputField);
         inputShown = true;
+        if(!editTodoChosen){
+            titleTodo.value = "";
+            dateTodo.value = null;
+        }
     }
+
+
 }
 
 function hideTodoInput(inputButton, inputFieldContainer){
     inputButton.className = "fas fa-plus";
     inputFieldContainer.style.height = "2.5rem";
+    editTodoChosen = false;
 }
 
 function showTodoInput (inputButton, inputFieldContainer, inputField){
     inputButton.className = "fas fa-times";
     inputFieldContainer.style.height = "15rem";
     inputField.style.display = "flex";
+    
 }
 
 /***
