@@ -53,6 +53,7 @@ function initAddTodoToList(){
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
+    
 //TEACHER ADDED DISS
     //let currentDate = new Date()
 
@@ -70,18 +71,28 @@ function gatherTodoInput(){
 
     const todos = getTodosFromLocalStorage();
     if(!editTodoChosen){
+
     listOfTodos.push(todoObject);
     todos.push(todoObject);
-    console.log('sparas i local')
     addTodoElementToList(todoObject);
     saveTodosToLocalStorage(todos);
-
     }
 
     else{
         updateEditTodo(todoObject)
         editTodoChosen = false;
-        console.log(todoObject)
+        const inputFieldContainer = document.querySelector(".slideInputText");
+        inputFieldContainer.style.height = "2.5rem";
+        const inputButton = document.querySelector(".addTodoButton i");
+        inputButton.className = "fas fa-plus";
+        inputShown = false;
+        
+        let ul = document.querySelector('ul')
+        while( ul.firstChild ){
+            ul.removeChild(ul.firstChild );
+          }
+        
+        loadTodos();
     }
     
     titleTodo.value = "";
@@ -100,8 +111,6 @@ function editTodo(todoObject){
     const dateTodo = document.querySelector("#inputDate");
     titleTodo.value = todoObject.title;
     dateTodo.value = todoObject.date;
-    
-    //DOESN*T SPLICE AS WANTED!
 }
 
 function searchPositionForTodo(i, todoObject){
@@ -124,7 +133,7 @@ function updateEditTodo(todoObject){
     todos.splice(index, 1, todoObject)
     console.log(todos)
     // Save the update todos list to storage
-    saveTodosToLocalStorage(todos)
+    saveTodosToLocalStorage(todos);
 }
 
 
@@ -138,6 +147,7 @@ function addTodoElementToList(todoObject){
 function createTodoElement(todoObject){
     
     const li = document.createElement('li');
+    li.setAttribute("class", ".todoListItem")
     const div1 = document.createElement('div');
     const div2 = document.createElement('div');
     const iconEdit = document.createElement('i');
