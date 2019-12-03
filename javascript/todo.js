@@ -1,4 +1,4 @@
-let listOfTodos = [getTodosFromLocalStorage()];
+let listOfTodos = [getTodosFromLocalStorage];
 console.log(listOfTodos)
 
 function addTodo(){
@@ -75,6 +75,7 @@ function gatherTodoInput(){
     console.log('sparas i local')
     addTodoElementToList(todoObject);
     saveTodosToLocalStorage(todos);
+
     }
 
     else{
@@ -87,8 +88,11 @@ function gatherTodoInput(){
     dateTodo.value = null;
 }
 
-function editTodo(todoObject){
 
+
+function editTodo(todoObject){
+    let index = -1
+    searchPositionForTodo(index, todoObject)
     showAndHideTodoInput()
     editTodoChosen = true;
     console.log
@@ -96,10 +100,31 @@ function editTodo(todoObject){
     const dateTodo = document.querySelector("#inputDate");
     titleTodo.value = todoObject.title;
     dateTodo.value = todoObject.date;
+    
+    //DOESN*T SPLICE AS WANTED!
+}
+
+function searchPositionForTodo(i, todoObject){
+    const todos = getTodosFromLocalStorage()
+    console.log(todoObject)
+    // Remove the todo from the list
+    
+    for (let i = 0; i < todos.length; i++) {
+        const storedTodo = todos[i];
+        if(storedTodo.title == todoObject.title){
+            index = i;
+            break
+        }
+    }
+    return i
 }
 
 function updateEditTodo(todoObject){
-console.log(listOfTodos)
+    const todos = getTodosFromLocalStorage()
+    todos.splice(index, 1, todoObject)
+    console.log(todos)
+    // Save the update todos list to storage
+    saveTodosToLocalStorage(todos)
 }
 
 
