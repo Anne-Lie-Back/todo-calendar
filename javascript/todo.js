@@ -17,6 +17,11 @@ function addTodo(){
 let inputShown = false;
 
 /**
+ * @type {Boolean} editTodoChosen - if true, user has clicked the edit-icon and chosen to edit todo.
+ */
+let editTodoChosen = false;
+
+/**
  * Handles what happens when the add-todo-button is clicked, depending on of input-field is shown or not. 
  * It also gets some HTMLelement and declares them to a variable.
  */
@@ -40,6 +45,7 @@ function showAndHideTodoInput(){
     else{
         showTodoInput(inputButton, inputFieldContainer, inputField);
         inputShown = true;
+
         if(!editTodoChosen){
             titleTodo.value = "";
             dateTodo.value = null;
@@ -67,8 +73,7 @@ function hideTodoInput(inputButton, inputFieldContainer){
 function showTodoInput (inputButton, inputFieldContainer, inputField){
     inputButton.className = "fas fa-times";
     inputFieldContainer.style.height = "15rem";
-    inputField.style.display = "flex";
-    
+    inputField.style.display = "flex";  
 }
 
 /***
@@ -76,17 +81,11 @@ function showTodoInput (inputButton, inputFieldContainer, inputField){
  */
 
 /**
- * @type {Boolean} editTodoChosen - if true, user has clicked the edit-icon and chosen to edit todo.
- */
-let editTodoChosen = false;
-
-/**
  * Sets an eventlistener to butten that gathers the user input.
  */
 function initAddTodoToList(){
     const addWrittenTodo = document.querySelector("#addWrittenTodo");
     addWrittenTodo.addEventListener('click', gatherTodoInput);
-
 }
 
 /**
@@ -124,8 +123,7 @@ function gatherTodoInput(){
 
         while( ul.firstChild ){
             ul.removeChild(ul.firstChild );
-        }
-        
+        }        
         loadTodos();
     }
     
