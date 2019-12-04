@@ -31,6 +31,12 @@ function showAndHideTodoInput(){
         hideTodoInput(inputButton, inputFieldContainer, inputField);
         inputShown = false;
     }
+
+    else if(inputShown && editTodoChosen){
+        showTodoInput(inputButton, inputFieldContainer, inputField);
+        editTodo(todoObject);
+    }
+
     else{
         showTodoInput(inputButton, inputFieldContainer, inputField);
         inputShown = true;
@@ -179,8 +185,10 @@ function createTodoElement(todoObject){
 function editTodo(todoObject){
     let index = -1;
     searchPositionForTodo(index, todoObject);
+    inputShown = false;
     showAndHideTodoInput();
     editTodoChosen = true;
+    
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
     titleTodo.value = todoObject.title;
