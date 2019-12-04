@@ -157,17 +157,18 @@ function calendarDayClicked(event){
 }
 
 
-//searches for todos on a selected date
+//Searches for todos on a selected date
 function filterToClickedDay(clickedDay){
-    console.log(clickedDay);
     var todos = JSON.parse(localStorage.getItem('todos'));
+    const ul = document.querySelector('.todoList');
+    //Resets the todo-list
+    while( ul.firstChild ){
+        ul.removeChild(ul.firstChild );
+      }
+    
     for (let todo of todos) {
+        
         if(todo.date == clickedDay){
-            
-
-            // Get the DOM ul element and list of todos
-            const ul = document.querySelector('.todoList');
-
             // Iterate over each todo and add it to the DOM
             const li = createTodoElement(todo);
             ul.append(li)
