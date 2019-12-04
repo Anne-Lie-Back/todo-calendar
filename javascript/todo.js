@@ -86,6 +86,7 @@ function initAddTodoToList(){
 /**
  * Declares the todoObject. Gathers and handles the user input in todo-field. 
  * Handles if the user has chosen to edit or to add todo and resets input fields after the user has submitted input.
+ * if editTodoIsCHosen is true, then it updates the targeted todo, removes all the li-elements and loads a new updated todo-list.
  */
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
@@ -138,7 +139,7 @@ function addTodoElementToList(todoObject){
 /**
  * Creates li-element with user's input.
  * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input.
- * @return{HTMLLIElement} li - the created li-element.
+ * @returns{HTMLLIElement} li - the created li-element.
  */
 function createTodoElement(todoObject){
     
@@ -171,9 +172,10 @@ function createTodoElement(todoObject){
 /****** EDIT TODO FUNCTIONS ****/
 
 /**
- * 
+ * Calls function that find position for selected "old" todo, shows input-field with old todo-values.
  * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
  */
+
 function editTodo(todoObject){
     let index = -1;
     searchPositionForTodo(index, todoObject);
@@ -185,9 +187,14 @@ function editTodo(todoObject){
     dateTodo.value = todoObject.date;
 }
 
+/**
+ * Finds the position of the todo and returns it
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
+ * @returns {number} i - index
+ */
 function searchPositionForTodo(i, todoObject){
     const todos = getTodosFromLocalStorage();
-    // Remove the todo from the list 
+    
     for (let i = 0; i < todos.length; i++) {
         const storedTodo = todos[i];
         if(storedTodo.title == todoObject.title){
@@ -198,27 +205,36 @@ function searchPositionForTodo(i, todoObject){
     return i
 }
 
+/**
+ * Changes the old todo to the new one and sends it to be saved in local storage.
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input.  
+ */
 function updateEditTodo(todoObject){
     const todos = getTodosFromLocalStorage();
     todos.splice(index, 1, todoObject);
-    // Save the update todos list to storage
     saveTodosToLocalStorage(todos);
 }
 
 
 /*** REMOVE TODO FUNCTIONS */
 
+/**
+ * removes the targeted li-element and triggers remove targeted todo from local storage.
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
+ */
 function removeTodo(todoObject){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
     removeTodoFromLocalStorage(todoObject);
 }
 
+/**
+ * removes the selected todo from local storage and sends the new list to be saved in local storage.
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
+ */
 function removeTodoFromLocalStorage(todoObject){
-    // Get all saved todos from storage
    
     const todos = getTodosFromLocalStorage();
-    // Remove the todo from the list
     let index = -1;
     for (let i = 0; i < todos.length; i++) {
         const storedTodo = todos[i];
@@ -228,19 +244,18 @@ function removeTodoFromLocalStorage(todoObject){
         }
     }
     todos.splice(index, 1);
-    
-    // Save the update todos list to storage
     saveTodosToLocalStorage(todos);
 }
 
 /***LOCAL STORAGE FUNCTIONS ***/
 
+/**
+ * loads the todo from local storage, iterates needed li-elements and appends them to the ul-element todoList.
+ */
 function loadTodos() {
-    // Get the DOM ul element and list of todos
     const ul = document.querySelector('.todoList');
     const todos = getTodosFromLocalStorage();
 
-    // Iterate over each todo and add it to the DOM
     for (const todo of todos) {
         const li = createTodoElement(todo);
         ul.append(li);
@@ -249,24 +264,24 @@ function loadTodos() {
 
 /**
  * Access the todos from local storage
- * @returns {Array<String>} list of todos
+ * @returns {Array<String>} todoObject with title and date
  */
 function getTodosFromLocalStorage() {
     return JSON.parse(localStorage.getItem('todos')) || [];
 }
 
 /**
- * Save all todos to local storage
- * @param {Array<String>} todos list of todos to be stored
+ * Saves all todos to local storage
+ * @param {Array<String>} todos list of todoObjects to be stored
  */
 
 function saveTodosToLocalStorage(todos) {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
-//resizes todo list
-window.addEventListener('resize', resizesTodoList);
-
+/**
+ * Resizes todolist.
+ */
 function resizesTodoList() {
     const todoList = document.querySelector(".todoList");
     if(window.innerWidth > 720){

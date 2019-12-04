@@ -5,5 +5,6 @@ function init(){
     loadTodos();
     addTodo();
     resizesTodoList();
+    window.addEventListener('resize', resizesTodoList);
 }
 
