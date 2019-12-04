@@ -101,6 +101,13 @@ body{
     font-size:0.9rem;
 }
 
+.todoList .editTodoIcon:hover{
+    cursor: pointer;
+    color:black;
+    background-color: #fbed21;
+    transition: color 350ms ease-in-out;
+}
+
 .inputTodoField{
     background-color:white;
     width:100%;

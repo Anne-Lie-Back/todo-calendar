@@ -1,5 +1,3 @@
-let listOfTodos = [getTodosFromLocalStorage];
-console.log(listOfTodos)
 
 function addTodo(){
     const addTodoButton = document.querySelector(".addTodoButton");
@@ -32,8 +30,6 @@ function showAndHideTodoInput(){
             dateTodo.value = null;
         }
     }
-
-
 }
 
 function hideTodoInput(inputButton, inputFieldContainer){
@@ -63,26 +59,15 @@ function initAddTodoToList(){
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
-    
-//TEACHER ADDED DISS
-    //let currentDate = new Date()
 
     let todoObject = {
         "title": titleTodo.value,
         "date": dateTodo.value
         }
-/*     let todoObject = {};
-    todoObject.title = titleTodo.value;
-    todoObject.date = dateTodo.value; */
-   
-    //console.log(todoObject);
-    //listOfTodos.push(todoObject);
-    //console.log(listOfTodos);
 
     const todos = getTodosFromLocalStorage();
     if(!editTodoChosen){
 
-    listOfTodos.push(todoObject);
     todos.push(todoObject);
     addTodoElementToList(todoObject);
     saveTodosToLocalStorage(todos);
@@ -100,7 +85,7 @@ function gatherTodoInput(){
         let ul = document.querySelector('ul')
         while( ul.firstChild ){
             ul.removeChild(ul.firstChild );
-          }
+        }
         
         loadTodos();
     }
@@ -109,46 +94,7 @@ function gatherTodoInput(){
     dateTodo.value = null;
 }
 
-
-
-function editTodo(todoObject){
-    let index = -1
-    searchPositionForTodo(index, todoObject)
-    showAndHideTodoInput()
-    editTodoChosen = true;
-    console.log
-    const titleTodo = document.querySelector("#titleTodo");
-    const dateTodo = document.querySelector("#inputDate");
-    titleTodo.value = todoObject.title;
-    dateTodo.value = todoObject.date;
-}
-
-function searchPositionForTodo(i, todoObject){
-    const todos = getTodosFromLocalStorage()
-    console.log(todoObject)
-    // Remove the todo from the list
-    
-    for (let i = 0; i < todos.length; i++) {
-        const storedTodo = todos[i];
-        if(storedTodo.title == todoObject.title){
-            index = i;
-            break
-        }
-    }
-    return i
-}
-
-function updateEditTodo(todoObject){
-    const todos = getTodosFromLocalStorage()
-    todos.splice(index, 1, todoObject)
-    console.log(todos)
-    // Save the update todos list to storage
-    saveTodosToLocalStorage(todos);
-}
-
-
 function addTodoElementToList(todoObject){
-    //createTodoElement(titleTodoValue, dateTodoValue);
     const li = createTodoElement(todoObject);
     document.querySelector('.todoList').append(li); 
 }
@@ -161,7 +107,7 @@ function createTodoElement(todoObject){
     const div1 = document.createElement('div');
     const div2 = document.createElement('div');
     const iconEdit = document.createElement('i');
-    iconEdit.setAttribute("class", "fas fa-ellipsis-h editTodoIcon");
+    iconEdit.setAttribute("class", "fas fa-pen editTodoIcon");
     const iconRemove = document.createElement('i')
     iconRemove.setAttribute("class", "fas fa-minus-circle removeTodoIcon")
     const checkbox = document.createElement('input');
@@ -182,6 +128,43 @@ function createTodoElement(todoObject){
     return li;
 }
 
+/****** EDIT TODO FUNCTIONS ****/
+
+function editTodo(todoObject){
+    let index = -1
+    searchPositionForTodo(index, todoObject)
+    showAndHideTodoInput()
+    editTodoChosen = true;
+    const titleTodo = document.querySelector("#titleTodo");
+    const dateTodo = document.querySelector("#inputDate");
+    titleTodo.value = todoObject.title;
+    dateTodo.value = todoObject.date;
+}
+
+function searchPositionForTodo(i, todoObject){
+    const todos = getTodosFromLocalStorage()
+    // Remove the todo from the list 
+    for (let i = 0; i < todos.length; i++) {
+        const storedTodo = todos[i];
+        if(storedTodo.title == todoObject.title){
+            index = i;
+            break
+        }
+    }
+    return i
+}
+
+function updateEditTodo(todoObject){
+    const todos = getTodosFromLocalStorage()
+    todos.splice(index, 1, todoObject)
+    console.log(todos)
+    // Save the update todos list to storage
+    saveTodosToLocalStorage(todos);
+}
+
+
+/*** REMOVE TODO FUNCTIONS */
+
 function removeTodo(todoObject){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
@@ -192,63 +175,22 @@ function removeTodoFromLocalStorage(todoObject){
     // Get all saved todos from storage
    
     const todos = getTodosFromLocalStorage()
-    console.log(todoObject)
     // Remove the todo from the list
     let index = -1
     for (let i = 0; i < todos.length; i++) {
         const storedTodo = todos[i];
-        if(storedTodo.title == todoObject.title){
+        if(storedTodo.title == todoObject.title && todoObject.date){
             index = i;
             break
         }
     }
 
-    console.log(index);
     //DOESN*T SPLICE AS WANTED!
     todos.splice(index, 1)
-    console.log(todos)
+    
     // Save the update todos list to storage
     saveTodosToLocalStorage(todos)
 }
-
-/****** EDIT TODO FUNCTIONS ****/
-
-
-
-
-
-/*     const editDiv = document.createElement('div');
-    const lineBreak = document.createElement('br');
-    editDiv.setAttribute("class", "editDiv");
-    const divTitle = document.createElement('div');
-    const divDateAndConfirm = document.createElement('div');
-    const inputTitle = document.createElement('input');
-    inputTitle.type = 'text';
-    const inputDate = document.createElement('input');
-    inputDate.type = 'date';
-
-    const iconConfirm = document.createElement('i');
-    iconConfirm.setAttribute("class", "fas fa-check");
-    li.append(lineBreak);
-    lineBreak.append(editDiv);
-    editDiv.append(divTitle, divDateAndConfirm);
-    divTitle.append(inputTitle);
-    divDateAndConfirm.append(inputDate, iconConfirm);
-    console.log('show editable inputfield')
-    showEditDiv()
-
-    if (showEditTodo){
-        editDiv.style.height = 'none';
-        showEditTodo = false;
-        console.log(showEditTodo)
-    }
-
-    else{
-        editDiv.style.display = 'flex';
-        showEditTodo = true;
-        console.log(showEditTodo)
-    }
-    return li; */
 
 /***LOCAL STORAGE FUNCTIONS ***/
 
