@@ -45,6 +45,7 @@
         padding: 0.3rem;
         background-color: white;
         display: flex;
+
         flex-direction: column;
         /*justify-content: flex-end;*/
     }

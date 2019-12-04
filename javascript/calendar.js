@@ -152,16 +152,45 @@ function calendarDayClicked(event){
     if(event.target.className === 'calendar-day'){
         console.log(event.target.id);
         clickedDayObject.year = currentViewYear;
-        clickedDayObject.month = currentViewMonth; // zero is january, 11 is december.
+        clickedDayObject.month = currentViewMonth+1; // zero is january, 11 is december.
         clickedDayObject.day = Number(event.target.id); //day of month.
-        console.log(clickedDayObject);
 
-        //anneLie(clickedDayObject);
+        document.getElementById(clickedDayObject.day).style.backgroundColor = "#fbed21"; // put color on selected day
+
+        // adds 0 to clickedDayObject so it matches todo
+        clickedDayObjectMonth = addZeroToDates(clickedDayObject.month);
+        clickedDayObjectDay = addZeroToDates(clickedDayObject.day);
+        function addZeroToDates(i) {
+            if (i < 10) {i = "0" + i};  
+            return i;
+          }
+
+        let clickedDay = clickedDayObject.year + "-" + clickedDayObjectMonth + "-" + clickedDayObjectDay;
+        filterToClickedDay(clickedDay);
     }
     else{
         //console.log(event.target.className);
     }
     
+}
+
+
+//searches for todos on a selected date
+function filterToClickedDay(clickedDay){
+    console.log(clickedDay);
+    var todos = JSON.parse(localStorage.getItem('todos'));
+    for (let todo of todos) {
+        if(todo.date == clickedDay){
+            
+
+            // Get the DOM ul element and list of todos
+            const ul = document.querySelector('.todoList');
+
+            // Iterate over each todo and add it to the DOM
+            const li = createTodoElement(todo);
+            ul.append(li)
+        }
+    }
 }
 
 //API for holidays. month 1 is january and 12 is december.
@@ -203,6 +232,7 @@ function addHelgAPIToCalendar(helgMonth){
             //console.log('day in month '+ i + ' ' + helgMonth.dagar[i].helgdag);
             //listOfDays[i].style.backgroundColor = 'red';
             listOfDays[i].classList.add('holiday');
+
             //listOfDays[i].innerHTML += '<br>' + helgMonth.dagar[i].helgdag;
             listOfDays[i].querySelector(".dayHolidayDiv").innerHTML = helgMonth.dagar[i].helgdag;
         }
