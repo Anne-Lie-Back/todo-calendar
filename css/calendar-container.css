@@ -13,20 +13,28 @@
 @media only screen and (min-width: 45em){
     .calendar-container{
         display: grid;
-        grid-template-columns: repeat(7, 1fr);/*set grid to 7 columns monday to sunday.*/
+        grid-template-columns: repeat(7, 14.28%);/*set grid to 7 columns monday to sunday.*/
+        grid-auto-rows: 1fr;
         grid-template-rows: 2rem 2rem;/*set first row to fixed height for day of week name.*/
-        gap: 0.07rem;
         margin: 2rem;
-        border:0.05rem black solid;
-        background-color: black;
+        border:0.1rem black solid;
+        background-color: white;
 
     }
     .calendar-top{
-        background-color: white;
         text-align: center;
         overflow: hidden;
         font-size: 1.5rem;
+        border-top:0.02rem black solid;
         -webkit-text-stroke: 1px black;
+    }
+
+    .calendar-top-left{
+        border-left:0.02rem black solid;
+    }
+
+    .calendar-top-right{
+        border-right:0.02rem black solid;
     }
 
     .calendar-top i{
@@ -39,32 +47,34 @@
         overflow: hidden;
         -webkit-text-stroke: 1px black;
         padding-top: 0.3rem;
-
+        border-bottom:0.02rem black solid;
     }
+
     .calendar-day{
         padding: 0.3rem;
-        background-color: white;
         display: flex;
-
+        border:0.02rem black solid;
         flex-direction: column;
         /*justify-content: flex-end;*/
     }
 
     .empty-day{
-        background-color: white;
+        border:0.02rem black solid;
     }
 
     .dayTodoDiv{
-        background-color: yellow;
+        background-color: rgb(212, 212, 155);
         width: 1.4rem;
         border-radius: 1rem;
         text-align: center;
     }
 
     .dayHolidayDiv{
-        overflow: hidden;
-        text-overflow: ellipsis;
-        background-color: wheat;
+        display: none;
+    }
+
+    .holiday{
+        background-color: rgb(252, 96, 96);
     }
 
 
@@ -75,4 +85,28 @@
     .calendar-header span{
         display: inline-block;
     }
+
+    .holiday{
+        background-color: transparent;    
+    }
+
+
+    .dayHolidayDiv{
+        overflow: hidden;
+        background-color: rgb(252, 96, 96);
+        border-radius: 0.2rem;
+        display: block;
+    }
+}
+
+@media only screen and (max-height: 44em){
+
+    .dayHolidayDiv{
+        display: none;
+    }
+
+    .holiday{
+        background-color: rgb(252, 96, 96);
+    }
+
 }
