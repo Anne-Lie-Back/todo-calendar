@@ -1,16 +1,25 @@
-
+/**
+ * Handles the add-todo-button
+ */
 function addTodo(){
     const addTodoButton = document.querySelector(".addTodoButton");
     addTodoButton.addEventListener('click', showAndHideTodoInput);
-    initAddTodoToList()
+    initAddTodoToList();
 }
 
 /**
  * *************SHOWING AND HIDING INPUT FIELD***************
  */
 
+/**
+ * @type {Boolean} inputShown - If inputShown is true, the inputfield is visable.
+ */
 let inputShown = false;
 
+/**
+ * Handles what happens when the add-todo-button is clicked, depending on of input-field is shown or not. 
+ * It also gets some HTMLelement and declares them to a variable.
+ */
 function showAndHideTodoInput(){
     const inputFieldContainer = document.querySelector(".slideInputText");
     const inputField = document.querySelector(".hideInputText");
@@ -19,7 +28,7 @@ function showAndHideTodoInput(){
     const dateTodo = document.querySelector("#inputDate");
     
     if (inputShown){
-        hideTodoInput(inputButton, inputFieldContainer, inputField)
+        hideTodoInput(inputButton, inputFieldContainer, inputField);
         inputShown = false;
     }
     else{
@@ -32,12 +41,23 @@ function showAndHideTodoInput(){
     }
 }
 
+/**
+ * Hides input field
+ * @param {Element} inputButton - submits input
+ * @param {Element} inputFieldContainer - the container of input-elements
+ */
 function hideTodoInput(inputButton, inputFieldContainer){
     inputButton.className = "fas fa-plus";
     inputFieldContainer.style.height = "2.5rem";
     editTodoChosen = false;
 }
 
+/**
+ * 
+ * @param {*} inputButton 
+ * @param {*} inputFieldContainer 
+ * @param {*} inputField 
+ */
 function showTodoInput (inputButton, inputFieldContainer, inputField){
     inputButton.className = "fas fa-times";
     inputFieldContainer.style.height = "15rem";
@@ -82,7 +102,8 @@ function gatherTodoInput(){
         inputButton.className = "fas fa-plus";
         inputShown = false;
         
-        let ul = document.querySelector('ul')
+        let ul = document.querySelector('ul');
+
         while( ul.firstChild ){
             ul.removeChild(ul.firstChild );
         }
@@ -103,12 +124,12 @@ function addTodoElementToList(todoObject){
 function createTodoElement(todoObject){
     
     const li = document.createElement('li');
-    li.setAttribute("class", ".todoListItem")
+    li.setAttribute("class", ".todoListItem");
     const div1 = document.createElement('div');
     const div2 = document.createElement('div');
     const iconEdit = document.createElement('i');
     iconEdit.setAttribute("class", "fas fa-pen editTodoIcon");
-    const iconRemove = document.createElement('i')
+    const iconRemove = document.createElement('i');
     iconRemove.setAttribute("class", "fas fa-minus-circle removeTodoIcon")
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -122,8 +143,8 @@ function createTodoElement(todoObject){
     todoDate.append(todoObject.date, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
     
-    iconRemove.addEventListener('click', function() { removeTodo(todoObject) })
-    iconEdit.addEventListener('click', function(){editTodo(todoObject)})
+    iconRemove.addEventListener('click', function() { removeTodo(todoObject) });
+    iconEdit.addEventListener('click', function(){editTodo(todoObject)});
     
     return li;
 }
@@ -131,9 +152,9 @@ function createTodoElement(todoObject){
 /****** EDIT TODO FUNCTIONS ****/
 
 function editTodo(todoObject){
-    let index = -1
-    searchPositionForTodo(index, todoObject)
-    showAndHideTodoInput()
+    let index = -1;
+    searchPositionForTodo(index, todoObject);
+    showAndHideTodoInput();
     editTodoChosen = true;
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
@@ -142,22 +163,21 @@ function editTodo(todoObject){
 }
 
 function searchPositionForTodo(i, todoObject){
-    const todos = getTodosFromLocalStorage()
+    const todos = getTodosFromLocalStorage();
     // Remove the todo from the list 
     for (let i = 0; i < todos.length; i++) {
         const storedTodo = todos[i];
         if(storedTodo.title == todoObject.title){
             index = i;
-            break
+            break;
         }
     }
     return i
 }
 
 function updateEditTodo(todoObject){
-    const todos = getTodosFromLocalStorage()
-    todos.splice(index, 1, todoObject)
-    console.log(todos)
+    const todos = getTodosFromLocalStorage();
+    todos.splice(index, 1, todoObject);
     // Save the update todos list to storage
     saveTodosToLocalStorage(todos);
 }
@@ -168,41 +188,39 @@ function updateEditTodo(todoObject){
 function removeTodo(todoObject){
     let doneTodo = event.target.closest('li');
     doneTodo.remove();
-    removeTodoFromLocalStorage(todoObject)
+    removeTodoFromLocalStorage(todoObject);
 }
 
 function removeTodoFromLocalStorage(todoObject){
     // Get all saved todos from storage
    
-    const todos = getTodosFromLocalStorage()
+    const todos = getTodosFromLocalStorage();
     // Remove the todo from the list
-    let index = -1
+    let index = -1;
     for (let i = 0; i < todos.length; i++) {
         const storedTodo = todos[i];
         if(storedTodo.title == todoObject.title && todoObject.date){
             index = i;
-            break
+            break;
         }
     }
-
-    //DOESN*T SPLICE AS WANTED!
-    todos.splice(index, 1)
+    todos.splice(index, 1);
     
     // Save the update todos list to storage
-    saveTodosToLocalStorage(todos)
+    saveTodosToLocalStorage(todos);
 }
 
 /***LOCAL STORAGE FUNCTIONS ***/
 
 function loadTodos() {
     // Get the DOM ul element and list of todos
-    const ul = document.querySelector('.todoList')
-    const todos = getTodosFromLocalStorage()
+    const ul = document.querySelector('.todoList');
+    const todos = getTodosFromLocalStorage();
 
     // Iterate over each todo and add it to the DOM
     for (const todo of todos) {
-        const li = createTodoElement(todo)
-        ul.append(li)
+        const li = createTodoElement(todo);
+        ul.append(li);
     }
 }
 
@@ -211,8 +229,7 @@ function loadTodos() {
  * @returns {Array<String>} list of todos
  */
 function getTodosFromLocalStorage() {
-    return JSON.parse(localStorage.getItem('todos')) || []
-    
+    return JSON.parse(localStorage.getItem('todos')) || [];
 }
 
 /**
@@ -221,13 +238,11 @@ function getTodosFromLocalStorage() {
  */
 
 function saveTodosToLocalStorage(todos) {
-    localStorage.setItem('todos', JSON.stringify(todos))
+    localStorage.setItem('todos', JSON.stringify(todos));
 }
 
-
-
 //resizes todo list
-window.addEventListener('resize', resizesTodoList)
+window.addEventListener('resize', resizesTodoList);
 
 function resizesTodoList() {
     const todoList = document.querySelector(".todoList");
