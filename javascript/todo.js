@@ -53,10 +53,10 @@ function hideTodoInput(inputButton, inputFieldContainer){
 }
 
 /**
- * 
- * @param {*} inputButton 
- * @param {*} inputFieldContainer 
- * @param {*} inputField 
+ * Makes the input-field visible and changes add-todo button-icon
+ * @param {Element} inputButton  - submits input
+ * @param {Element} inputFieldContainer - the container of input elements
+ * @param {Element} inputField - input elements
  */
 function showTodoInput (inputButton, inputFieldContainer, inputField){
     inputButton.className = "fas fa-times";
@@ -68,14 +68,25 @@ function showTodoInput (inputButton, inputFieldContainer, inputField){
 /***
  * ************ ACTUALLY ADDING TODO ********
  */
+
+/**
+ * @type {Boolean} editTodoChosen - if true, user has clicked the edit-icon and chosen to edit todo.
+ */
 let editTodoChosen = false;
 
+/**
+ * Sets an eventlistener to butten that gathers the user input.
+ */
 function initAddTodoToList(){
     const addWrittenTodo = document.querySelector("#addWrittenTodo");
     addWrittenTodo.addEventListener('click', gatherTodoInput);
 
 }
 
+/**
+ * Declares the todoObject. Gathers and handles the user input in todo-field. 
+ * Handles if the user has chosen to edit or to add todo and resets input fields after the user has submitted input.
+ */
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
@@ -115,12 +126,20 @@ function gatherTodoInput(){
     dateTodo.value = null;
 }
 
+/**
+ * send todoObject to function that creates li-elements and appends the created li to todo-ul.
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input.
+ */
 function addTodoElementToList(todoObject){
     const li = createTodoElement(todoObject);
     document.querySelector('.todoList').append(li); 
 }
 
-
+/**
+ * Creates li-element with user's input.
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input.
+ * @return{HTMLLIElement} li - the created li-element.
+ */
 function createTodoElement(todoObject){
     
     const li = document.createElement('li');
@@ -151,6 +170,10 @@ function createTodoElement(todoObject){
 
 /****** EDIT TODO FUNCTIONS ****/
 
+/**
+ * 
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
+ */
 function editTodo(todoObject){
     let index = -1;
     searchPositionForTodo(index, todoObject);
