@@ -169,7 +169,7 @@ function createTodoElement(todoObject){
     todoDate.append(todoObject.date, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
     
-    checkbox.addEventListener('change', function() { saveCheckedTodo(todoObject)});
+    checkbox.addEventListener('click', function() { saveCheckedTodo(todoObject)});
     iconRemove.addEventListener('click', function() { removeTodo(todoObject) });
     iconEdit.addEventListener('click', function(){editTodo(todoObject)});
     return li;
@@ -178,22 +178,22 @@ function createTodoElement(todoObject){
 function saveCheckedTodo(todoObject){
     const checkedBox = document.querySelector('input[type="checkbox"]')
     console.log('choklad')
-    if('checkedBox:checked = true '){
+    if(!todoObject.isChecked){
         let index = -1;
         searchPositionForTodo(index, todoObject);
         todoObject.isChecked = true;
         updateEditTodo(todoObject);
         
-        console.log('checkbox' + todoObject)
+        console.log('sant!')
     }
 
-    else if ('checkedBox:checked = false'){
+    else if (todoObject.isChecked){
         let index = -1;
         searchPositionForTodo(index, todoObject);
         todoObject.isChecked = false;
         updateEditTodo(todoObject);
         
-        console.log('checkbox' + todoObject)
+        console.log('falsk')
     }
 
     console.log(todoObject);
