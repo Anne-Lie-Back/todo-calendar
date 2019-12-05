@@ -159,9 +159,15 @@ function createTodoElement(todoObject){
     iconRemove.setAttribute("class", "fas fa-minus-circle removeTodoIcon")
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.setAttribute("class", "checkedBox")
     const todoText = document.createElement('p');
     todoText.setAttribute("class", "maximizeTextInTodo");
     const todoDate = document.createElement('span');
+
+    if(todoObject.isChecked){
+        //checkedBox.style.content = '✔'
+        console.log('den är checkad!')
+    }
 
     li.append(div1, div2);
     div1.append(checkbox, todoText);  
@@ -172,11 +178,12 @@ function createTodoElement(todoObject){
     checkbox.addEventListener('click', function() { saveCheckedTodo(todoObject)});
     iconRemove.addEventListener('click', function() { removeTodo(todoObject) });
     iconEdit.addEventListener('click', function(){editTodo(todoObject)});
+
+    
     return li;
 }
 
 function saveCheckedTodo(todoObject){
-    const checkedBox = document.querySelector('input[type="checkbox"]')
     console.log('choklad')
     if(!todoObject.isChecked){
         let index = -1;
