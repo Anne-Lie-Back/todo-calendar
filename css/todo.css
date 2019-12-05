@@ -191,8 +191,6 @@ input[type=checkbox]:checked + p {
 
 }
 
-/*Pillar inte mer ico ALs kod har något bättre att greppa första <p> med*/
-
 .maximizeTextInTodo{
     text-overflow: ellipsis; 
     display: block; 
