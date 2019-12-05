@@ -26,8 +26,12 @@ function addZeroDateFunc(eventID){
     clickedDayObject.year = currentViewYear;
     clickedDayObject.month = currentViewMonth+1; // zero is january, 11 is december.
     clickedDayObject.day = Number(eventID); //day of month.
+    let clickedDayStyling = document.getElementById(clickedDayObject.day);
+    const calendarContainer = document.querySelector('.calendar-container');
+    var calendarDay = document.querySelectorAll('.calendar-day');
+    var holiday = document.querySelectorAll('.holiday'); 
 
-    document.getElementById(clickedDayObject.day).style.backgroundColor = "#fbed21"; // put color on selected day
+
 
     // adds 0 to clickedDayObject so it matches todo
     clickedDayObjectMonth = addZeroToDates(clickedDayObject.month);
@@ -36,14 +40,39 @@ function addZeroDateFunc(eventID){
         if (i < 10) {i = "0" + i};  
         return i;
       }
-
     let clickedDay = clickedDayObject.year + "-" + clickedDayObjectMonth + "-" + clickedDayObjectDay;
-    filterToClickedDay(clickedDay);
+
+
+
+    if(calendarContainer.style.backgroundColor == "white"){
+        calendarContainer.style.backgroundColor = "#e6e6d5"; // put color on calendar
+        clickedDayStyling.style.backgroundColor = "#fbed21"; // put color on selected day
+
+        filterToClickedDay(clickedDay);
+    } else {
+        calendarContainer.style.backgroundColor = "white"; // put color on calendar
+
+        for(i=0 ; i < calendarDay.length; i++){
+            calendarDay[i].style.backgroundColor = "transparent";
+        }
+
+        for(i=0 ; i < holiday.length; i++){
+            holiday[i].style.backgroundColor = "#fc6060";
+        }
+
+        let ul = document.querySelector('ul')
+        while( ul.firstChild ){
+            ul.removeChild(ul.firstChild );
+          }
+        loadTodos();
+    }
+
+    
 }
 
 //Searches for todos on a selected date
 function filterToClickedDay(clickedDay){
-    var todos = JSON.parse(localStorage.getItem('todos'));
+    let todos = JSON.parse(localStorage.getItem('todos'));
     const ul = document.querySelector('.todoList');
     //Resets the todo-list
     while( ul.firstChild ){

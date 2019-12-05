@@ -164,6 +164,7 @@ body{
     position:absolute;
     height:2.5rem;
     transition: height 1000ms;
+    overflow: hidden;
 }
 
 .hideInputText{
@@ -190,8 +191,6 @@ input[type=checkbox]:checked + p {
     padding-right: 0.7rem;
 
 }
-
-/*Pillar inte mer ico ALs kod har något bättre att greppa första <p> med*/
 
 .maximizeTextInTodo{
     text-overflow: ellipsis; 

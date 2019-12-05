@@ -93,13 +93,16 @@ function initAddTodoToList(){
  * Handles if the user has chosen to edit or to add todo and resets input fields after the user has submitted input.
  * if editTodoIsCHosen is true, then it updates the targeted todo, removes all the li-elements and loads a new updated todo-list.
  */
+
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
+    
 
     let todoObject = {
         "title": titleTodo.value,
-        "date": dateTodo.value
+        "date": dateTodo.value,
+        "isChecked": false
         }
 
     const todos = getTodosFromLocalStorage();
@@ -120,7 +123,6 @@ function gatherTodoInput(){
         inputShown = false;
         
         let ul = document.querySelector('ul');
-
         while( ul.firstChild ){
             ul.removeChild(ul.firstChild );
         }        
@@ -137,7 +139,7 @@ function gatherTodoInput(){
  */
 function addTodoElementToList(todoObject){
     const li = createTodoElement(todoObject);
-    document.querySelector('.todoList').append(li); 
+    document.querySelector('.todoList').append(li);
 }
 
 /**
@@ -158,20 +160,46 @@ function createTodoElement(todoObject){
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     const todoText = document.createElement('p');
+    todoText.setAttribute("class", "maximizeTextInTodo");
     const todoDate = document.createElement('span');
 
+    if(todoObject.isChecked){
+        console.log(todoObject)
+        checkbox.checked = "true";
+    } 
+
     li.append(div1, div2);
-    div1.append(checkbox, todoText);
-    todoText.setAttribute("class", "maximizeTextInTodo");
+    div1.append(checkbox, todoText);  
     todoText.append(todoObject.title, todoDate);
     todoDate.append(todoObject.date, iconEdit, iconRemove);
     div2.append(iconEdit, iconRemove);
     
+    checkbox.addEventListener('click', function() { saveCheckedTodo(todoObject)});
     iconRemove.addEventListener('click', function() { removeTodo(todoObject) });
     iconEdit.addEventListener('click', function(){editTodo(todoObject)});
     
     return li;
 }
+
+function saveCheckedTodo(todoObject){
+    
+    if(!todoObject.isChecked){
+        let index = -1;
+        searchPositionForTodo(index, todoObject);
+        todoObject.isChecked = true;
+        updateEditTodo(todoObject);
+        console.log('sant')
+    }
+
+    else if (todoObject.isChecked){
+        let index = -1;
+        searchPositionForTodo(index, todoObject);
+        todoObject.isChecked = false;
+        updateEditTodo(todoObject);
+        
+        console.log('falsk')
+    }
+} 
 
 /****** EDIT TODO FUNCTIONS ****/
 
@@ -242,13 +270,14 @@ function removeTodoFromLocalStorage(todoObject){
    
     const todos = getTodosFromLocalStorage();
     let index = -1;
+    console.log('splice please?', index)
     for (let i = 0; i < todos.length; i++) {
         const storedTodo = todos[i];
-        if(storedTodo.title == todoObject.title && todoObject.date){
-            index = i;
-            break;
+        if(storedTodo.title == todoObject.title && storedTodo.date == todoObject.date){
+            index = i;       
         }
     }
+    console.log(index)
     todos.splice(index, 1);
     saveTodosToLocalStorage(todos);
 }

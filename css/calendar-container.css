@@ -19,7 +19,8 @@
         margin: 0 1rem 0.5rem 1rem;
         border:0.1rem black solid;
         background-color: white;
-
+        cursor: pointer;
+        transition: background-color 0.3s;
     }
     .calendar-top{
         text-align: center;
@@ -42,7 +43,6 @@
     }
 
     .calendar-header{
-        background-color: white;
         text-align: center;
         overflow: hidden;
         -webkit-text-stroke: 1px black;
@@ -71,7 +71,7 @@
     }
 
     .dayTodoDiv{
-        background-color: rgb(212, 212, 155);
+        background-color:#e2d84b;
         width: 1.4rem;
         height: 1.4rem;
         border-radius: 1rem;
@@ -96,7 +96,9 @@
     }
 
     .holiday{
-        background-color: rgb(252, 96, 96);
+
+        background-color: #fc6060;
+
     }
 
 
@@ -109,7 +111,7 @@
     }
 
     .holiday{
-        background-color: transparent;    
+        background-color:  rgb(252, 96, 96);    
     }
 
 
