@@ -1,53 +1,74 @@
+/** The current year the calendar is displaying.
+ * @type {number}
+ */
 let currentViewYear;
+
+/**The current month the calendar is displaying.
+ * @type {number}
+ */
 let currentViewMonth;
+
+/**An object containing numbers of year,month,day of the calendar day box that was clicked
+ * from calendarClickedHandler.js.
+ * @type {{year: number, month: number, day: number}}
+ */
 let clickedDayObject = {year: 0, month:0, day:0};
 
+
+/**
+ * Start function called from javascript.js load event.
+ */
 function calendarStart(){
-    currentViewYear = new Date().getFullYear();
+    currentViewYear = new Date().getFullYear(); //get todays date.
     currentViewMonth = new Date().getMonth();
-    //console.log(currentViewYear,currentViewMonth);
-    addDaysToCalendar(currentViewYear,currentViewMonth);
-    //addDaysToCalendar(2020,1);
-    // document.querySelector('.calendar-container').addEventListener('click', event => {calendarDayClicked(event);});
-    //helgDagarAPI(currentViewYear, currentViewMonth);
+    addDaysToCalendar(currentViewYear,currentViewMonth); // fills empty container with day boxes.
+
+    //listens for events on todo list, for when to update number of todos in calendar.
     document.querySelector('.todoContainer').addEventListener('click', event => {todoClick(event);});
 }
 
+
+/**Holds smaller functions that fills the calendar with day boxes, holidays, number of todos
+ * and updates month/year , then clears the old boxes when called again.
+ * @param {number} setYear 
+ * @param {number} setMonth 
+ */
 function addDaysToCalendar(setYear,setMonth){
     removeAllDays();//clear old month view.
-    //console.log(setYear,setMonth);
 
     helgDagarAPI(setYear, setMonth)
 
-    fillEmptyDays(getFirstWeekdayOfMonth(setYear,setMonth));
+    fillEmptyDays(getFirstWeekdayOfMonth(setYear,setMonth));//
 
     addDayDivsToMonth(setYear, setMonth);
 
     changeCalendarYearMonthName(setYear,setMonth);
-    //console.log("done days ");
-    fillLastEmptyDays();
 
-    //console.log(getTodosFromLocalStorage())
-    //console.log('local ')
+    fillLastEmptyDays();
 
     updateCalendarTodo();
 
 }
 
-//fill day divs in calendar-container.
+
+/**fill day divs in calendar-container.
+ * 
+ * @param {number} setYear 
+ * @param {number} setMonth 
+ */
 function addDayDivsToMonth(setYear, setMonth){
     for(let i = 0; i < getDaysInMonth(setYear,setMonth); i++){
         let makeDiv = document.createElement("div");
-        let makeDayNrDiv = document.createElement("div"); //new
-        let makeDayTodoDiv = document.createElement("div"); //new
-        let makeHolidayDiv = document.createElement("div"); //new
+        let makeDayNrDiv = document.createElement("div");
+        let makeDayTodoDiv = document.createElement("div");
+        let makeHolidayDiv = document.createElement("div");
         makeDiv.className = "calendar-day";
-        makeDayNrDiv.className = "dayNrDiv"; //new
-        makeDayTodoDiv.className = "dayTodoDiv"; //new
-        makeHolidayDiv.className = "dayHolidayDiv"; //new
+        makeDayNrDiv.className = "dayNrDiv";
+        makeDayTodoDiv.className = "dayTodoDiv";
+        makeHolidayDiv.className = "dayHolidayDiv";
         makeDiv.id = (i + 1 );
         let makeText = document.createTextNode(" " + (i +1 ));
-        makeDayNrDiv.appendChild(makeText); //new
+        makeDayNrDiv.appendChild(makeText);
         makeDiv.appendChild(makeDayNrDiv);
         makeDiv.appendChild(makeDayTodoDiv);
         makeDiv.appendChild(makeHolidayDiv);
@@ -55,12 +76,15 @@ function addDayDivsToMonth(setYear, setMonth){
     }
 }
 
-//Fill empty days if month does not start on a monday.
+/**Fill empty days if month does not start on a monday.
+ * 
+ * @param {number} nrOfEmptyDays 
+ */
 function fillEmptyDays(nrOfEmptyDays){
     if(nrOfEmptyDays === 0){ //sunday is zero so set to 7.
         nrOfEmptyDays = 7;
     }
-    //console.log('nr days '+nrOfEmptyDays);
+
     for(let i = 0; i < (nrOfEmptyDays-1); i++){
         let makeDiv = document.createElement('div');
         makeDiv.className = "empty-day";
@@ -68,15 +92,18 @@ function fillEmptyDays(nrOfEmptyDays){
     }
 }
 
-//fill rest of calendar empty days.
+
+/**
+ * Fill rest of calendar empty days at last week of month to have a full grid.
+ */
 function fillLastEmptyDays(){
+    //how many days are left after all day boxes modulus 7 days for a week.
     let restDays = (document.querySelectorAll('.calendar-day').length + document.querySelectorAll('.empty-day').length) % 7;
 
     restDays = 7 - restDays;
-    //console.log(restDays);
+
     if(restDays < 7){
         for(let i = 0; i < (restDays); i++){
-            //console.log(' loop ' +  i);
             let makeDiv = document.createElement('div');
             makeDiv.className = "empty-day";
             document.querySelector('.calendar-container').appendChild(makeDiv);
@@ -84,11 +111,14 @@ function fillLastEmptyDays(){
     }
 }
 
-//Remove all calendar days for next month.
+
+/**
+ * Remove all calendar days for next month to be filled with new days.
+ */
 function removeAllDays(){
     const allDaysList = document.querySelectorAll('.calendar-day');
     const emptyDaysList = document.querySelectorAll('.empty-day');
-    //console.log(allDaysList , emptyDaysList);
+
     for(let day of allDaysList){
         day.remove();
     }
@@ -96,9 +126,14 @@ function removeAllDays(){
     for(let emptyDay of emptyDaysList){
         emptyDay.remove();
     }
-    //console.log(allDaysList , emptyDaysList);
 }
 
+
+/**Sets month text name at top of calendar.
+ * 
+ * @param {number} setYear 
+ * @param {number} setMonth 
+ */
 function changeCalendarYearMonthName(setYear,setMonth){
 
     const monthName = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
@@ -106,21 +141,33 @@ function changeCalendarYearMonthName(setYear,setMonth){
     document.querySelector('.calendar-month').innerHTML = monthName[setMonth];//add one so december is month 12
 }
 
-//what day of week to start adding calendar days.
+
+/**what day of week to start adding calendar days.
+ * 
+ * @param {number} setYear 
+ * @param {number} setMonth 
+ */
 function getFirstWeekdayOfMonth(setYear,setMonth){
     let firstWeekday = new Date(setYear,setMonth, 1).getDay();
-    //console.log(' first week day: '+firstWeekday);
-    return firstWeekday;//0 is sunday, 1 is monday.
+    return firstWeekday;    //0 is sunday, 1 is monday.
 }
 
-//How many days in current month to add to calendar.
+
+/**How many days are there in current month to add to calendar.
+ * 
+ * @param {number} setYear 
+ * @param {number} setMonth 
+ */
 function getDaysInMonth(setYear,setMonth){
-    let nrDaysInMonth = new Date(setYear, (setMonth+1), 0).getDate();//zero is last day of previous month
-    //console.log('days ' + nrDaysInMonth);
+    //zero is last day of previous month
+    let nrDaysInMonth = new Date(setYear, (setMonth+1), 0).getDate();
     return nrDaysInMonth;
 }
 
-//change month view, add one month.
+
+/**
+ * Change month view, add one month and then add the new month to calendar.
+ */
 function nextMonth(){
     if(currentViewMonth === 11){ //if december
         currentViewMonth = 0;
@@ -130,11 +177,12 @@ function nextMonth(){
         currentViewMonth++;
     }
     
-    //console.log('current year month view: '+currentViewYear + currentViewMonth);
     addDaysToCalendar(currentViewYear,currentViewMonth);
 }
 
-//change month view, back one month.
+/**
+ * Change month view, remove one month and then add the new month to calendar.
+ */
 function prevMonth(){
     if(currentViewMonth === 0){ //if january;
         currentViewMonth = 11;
@@ -143,19 +191,21 @@ function prevMonth(){
     else{
         currentViewMonth--;
     }
-    //console.log('current year month view: '+currentViewYear + currentViewMonth);
+
     addDaysToCalendar(currentViewYear,currentViewMonth);
 }
 
-//API for holidays. month 1 is january and 12 is december.
+
+/**API for holidays. month 1 is january and 12 is december.
+ * When response is received, addHelgAPIToCalendar is called.
+ * @param {number} getYear 
+ * @param {number} getMonth 
+ */
 async function helgDagarAPI(getYear,getMonth){
-    //add try catch later. TODO.
-    //new brach calendar-helgdagar.
+
     try {
         const response = await fetch('https://api.dryg.net/dagar/v2.1/' + getYear+'/'+(getMonth+1)); //add one to month for js date starts at zero.
         const jsonResponse = await response.json();
-        //console.log(jsonResponse);
-        //return jsonResponse;
         addHelgAPIToCalendar(jsonResponse);
     }
     catch (error){
@@ -164,37 +214,31 @@ async function helgDagarAPI(getYear,getMonth){
     
 }
 
-function helgAPI(getYear,getMonth){
-    fetch('https://api.dryg.net/dagar/v2.1/' + getYear+'/'+(getMonth+1)) //add one to month for js date starts at zero.
-        .then (function (response){
-            //console.log(response.json());
-            return response.json();
-        })
-        .then(function(data) {
-            //console.log(data.dagar);
-            return data.dagar;
-        })
-}
+/**
+ * 
+ * @typedef {{helgdag: string}} dagar
+ */
 
-//Add holiday text to calendar day div.
+/**Add holiday text to calendar day div.
+ * 
+ * @param {Array<dagar>} helgMonth 
+ */
 function addHelgAPIToCalendar(helgMonth){
-    //console.log(helgMonth.dagar);
+
     let listOfDays = document.querySelectorAll('.calendar-day');
+    
     for(let i = 0; i < Object.keys(helgMonth.dagar).length ; i++){
         if(helgMonth.dagar[i].helgdag){
-
-            //console.log('day in month '+ i + ' ' + helgMonth.dagar[i].helgdag);
-            //listOfDays[i].style.backgroundColor = 'red';
             listOfDays[i].classList.add('holiday');
-
-            //listOfDays[i].innerHTML += '<br>' + helgMonth.dagar[i].helgdag;
             listOfDays[i].querySelector(".dayHolidayDiv").innerHTML = helgMonth.dagar[i].helgdag;
         }
     }
 }
 
 
-//Get todo's saved in local storage from todo.js and adds them to calendar days as a number.
+/**
+ * Get todo's saved in local storage from function in todo.js and adds them to calendar days as a number.
+ */
 function updateCalendarTodo(){
     let listOfDays = document.querySelectorAll('.calendar-day');
     let todoList = getTodosFromLocalStorage();
@@ -219,7 +263,6 @@ function updateCalendarTodo(){
             paddedDay = dayDiv.id;
         }
         let paddedDate = currentViewYear + '-' + paddedMonth + '-' + paddedDay;
-        //console.log(paddedDate + ' padded');
         
         //loop over all days in local storage todo to see how many there are in a day.
         for(let todo of todoList){
@@ -230,7 +273,6 @@ function updateCalendarTodo(){
 
         //Add number of todo's in todoDiv.
         if(todoNrOnDay != 0){
-            //console.log(todoNrOnDay + ' todoNr ' + paddedDate);
             dayDiv.querySelector(".dayTodoDiv").innerHTML = todoNrOnDay;
         }
         else{
@@ -239,19 +281,22 @@ function updateCalendarTodo(){
     }
 
 }
+/**
+ * 
+ * @typedef {{className: string}} target
+ */
 
-//Event listeners from todo.js when remove, add buttons are clicked.
-//Updates calendar todo number. 
+ /**Event listeners from todo aside, when remove or add buttons are clicked.
+ *Updates calendar todo number. 
+ * @param {target} event 
+ */
 function todoClick(event){
-    //console.log(event.target.className);
-    //console.log(event.target.id);
+
     if(event.target.className == 'fas fa-minus-circle removeTodoIcon'){
-        //console.log('remove button clicked');
         updateCalendarTodo();
     }
 
     if(event.target.className == 'fas fa-check' || event.target.id == "addWrittenTodo"){
-        //console.log('add clicked');
         updateCalendarTodo();
     }
 }
