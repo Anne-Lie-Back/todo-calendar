@@ -159,15 +159,13 @@ function createTodoElement(todoObject){
     iconRemove.setAttribute("class", "fas fa-minus-circle removeTodoIcon")
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.setAttribute("class", "checkedBox")
     const todoText = document.createElement('p');
     todoText.setAttribute("class", "maximizeTextInTodo");
     const todoDate = document.createElement('span');
 
     if(todoObject.isChecked){
-        //checkedBox.style.content = '✔'
-        console.log('den är checkad!')
-    }
+        console.log(todoObject)
+    } 
 
     li.append(div1, div2);
     div1.append(checkbox, todoText);  
@@ -178,20 +176,18 @@ function createTodoElement(todoObject){
     checkbox.addEventListener('click', function() { saveCheckedTodo(todoObject)});
     iconRemove.addEventListener('click', function() { removeTodo(todoObject) });
     iconEdit.addEventListener('click', function(){editTodo(todoObject)});
-
     
     return li;
 }
 
 function saveCheckedTodo(todoObject){
-    console.log('choklad')
+    
     if(!todoObject.isChecked){
         let index = -1;
         searchPositionForTodo(index, todoObject);
         todoObject.isChecked = true;
         updateEditTodo(todoObject);
-        
-        console.log('sant!')
+        console.log('sant')
     }
 
     else if (todoObject.isChecked){
@@ -202,9 +198,7 @@ function saveCheckedTodo(todoObject){
         
         console.log('falsk')
     }
-
-    console.log(todoObject);
-}
+} 
 
 /****** EDIT TODO FUNCTIONS ****/
 
@@ -275,13 +269,14 @@ function removeTodoFromLocalStorage(todoObject){
    
     const todos = getTodosFromLocalStorage();
     let index = -1;
+    console.log('splice please?', index)
     for (let i = 0; i < todos.length; i++) {
         const storedTodo = todos[i];
-        if(storedTodo.title == todoObject.title && todoObject.date){
-            index = i;
-            break;
+        if(storedTodo.title == todoObject.title && storedTodo.date == todoObject.date){
+            index = i;       
         }
     }
+    console.log(index)
     todos.splice(index, 1);
     saveTodosToLocalStorage(todos);
 }
