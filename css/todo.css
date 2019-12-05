@@ -164,6 +164,7 @@ body{
     position:absolute;
     height:2.5rem;
     transition: height 1000ms;
+    overflow: hidden;
 }
 
 .hideInputText{
