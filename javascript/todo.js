@@ -165,6 +165,7 @@ function createTodoElement(todoObject){
 
     if(todoObject.isChecked){
         console.log(todoObject)
+        checkbox.checked = "true";
     } 
 
     li.append(div1, div2);
