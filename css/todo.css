@@ -1,8 +1,4 @@
-body{
-    overflow: hidden;
-}
-
-.todoContainer{
+.todoContainer{ /*Styles main todoContainer - is inside aside*/
     display:flex;
     flex-direction:column;
     background-color:white;
@@ -10,7 +6,7 @@ body{
     flex-grow:1;
 }
 
-.addTodoButton{
+.addTodoButton{ /*Styles the yellow Add button*/
     width:100%;
     display:flex;
     position:absolute;
@@ -20,7 +16,7 @@ body{
     background-color:white;
 }
 
-.addTodoButton i{
+.addTodoButton i{ /*Styles the + and X in the yellow Add button*/
     display:flex;
     align-items: center;
     justify-content: center;
@@ -41,19 +37,43 @@ body{
     cursor: pointer;
 }
 
-.todoList{
+.todoList{ /*Todolist responsive size fixed in todo.js*/
     overflow-y: auto;
     background-color:white;
     height:22rem;
 }
 
-/*edit experiment*/
-.todoList ul{
+input[type="checkbox"]{ /*Main checkbox styling*/
+    -webkit-appearance:none; /*Removes default styling*/
+    background-color: #fff;
+    width: 1.3rem;
+    height: 1.3rem;
+    position: relative;
+    top: -0.10rem; /*Relativ position*/
+    border: solid black 0.1rem;
+    outline: none;
+}
+
+input[type="checkbox"]:checked:before { /*Checkbox when checked styling*/
+    content: '✔'; /*Checkbox content*/
+    padding: auto;
+    position: absolute;
+    left: 0.3rem; /*Move if ✔ isn't centered*/
+    top: 0.05rem; /*Move if ✔ isn't centered*/
+   }
+
+   input[type=checkbox]:checked + p { /*Puts line through text when checked*/
+    text-decoration: line-through;
+  } 
+
+
+
+.todoList ul{ /*Puts the content in the todolist in a row*/
     display:flex;
     flex-direction:column;
 }
 
-.todoList li{
+.todoList li{ /*Styles the text in todolist*/
     padding: 0.5rem 1rem;
     border-bottom: 0.15rem solid black;
     display:flex;
@@ -61,7 +81,7 @@ body{
     align-items: center;
 }
 
-.todoList li div{
+.todoList li div{ /*Puts the content in the todolist in a row*/
     display:flex;
     flex-direction:row;
     align-items: center;
@@ -71,29 +91,29 @@ body{
     margin:0 0.5rem 0 0;
 }
 
-.todoList span{
+.todoList span{ /*Puts the content in the todolist in a row*/
     font-size:0.7rem;
     margin:0 0.3rem 0 0.3rem;
 }
 
-.todoList i{
+.todoList i{ /*Margin on the symbols in the redo- and remove-button*/
     margin: 0.2rem;
 }
 
-.todoList .removeTodoIcon{
+.todoList .removeTodoIcon{ /*Size on content in remove button*/
     font-size:1.5rem;
 }
 
 
-.todoList .removeTodoIcon:hover{
+.todoList .removeTodoIcon:hover{ /*Hover effect on the remove-button*/
  cursor: pointer;
  color: #fbed21;
  background-color: black;
  border-radius:50px;
- transition: color 350ms ease-in-out;
+ transition: color 350ms ease-in-out; /*Styles hover effect*/
 }
 
-.todoList .editTodoIcon{
+.todoList .editTodoIcon{ /*Styling of remove-button*/
     color:white;
     background-color: black;
     padding: 0.3rem;
@@ -101,21 +121,20 @@ body{
     font-size:0.9rem;
 }
 
-.todoList .editTodoIcon:hover{
+.todoList .editTodoIcon:hover{ /*Hover effect on the redo-button*/
     cursor: pointer;
     color:black;
     background-color: #fbed21;
     transition: color 350ms ease-in-out;
 }
 
-.inputTodoField{
+.inputTodoField{ /*Main styling input field*/
     background-color:white;
     width:100%;
-    height:80vh;  
     bottom:3rem;
 }
 
-.inputTodoField input{
+.inputTodoField input{ /*Styles input fields*/
     width:15rem;
     padding:0.5rem;
     margin: 1rem;
@@ -124,7 +143,7 @@ body{
 
 }
 
-.inputDate{
+.inputDate{ /*Styles date input field*/
     display:flex;
     flex-direction:row;
     width:15rem;
@@ -132,13 +151,13 @@ body{
     justify-content: space-between;
 }
 
-.inputDate button{
+.inputDate button{ /*Styles input button*/
     padding: 0.3rem 0.7rem;
     background-color: #fbed21;
     border:3px solid black;
 }
 
-.inputDate button:hover{
+.inputDate button:hover{ /*Styles hovering over input button*/
     cursor: pointer;
     color:#fbed21;
     background-color:black;
@@ -146,29 +165,28 @@ body{
     transition: background-color 300ms ease-in-out;
 }
 
-.inputDate button i{
+.inputDate button i{ /*Styles content of input button*/
     display:flex;
     align-items: center;
     justify-content: center;
     font-size:1.3rem;
 }
 
-.inputDate input{
+.inputDate input{  /*Styles inside date box*/
     margin:0 1rem 0 0;
     padding:0.5rem;
     border:3px solid black;
     outline: none;
 }
 
-.slideInputText{
+.slideInputText{ /*Hides area until button is add todo button is clicked*/
     position:absolute;
     height:2.5rem;
-    transition: height 1000ms;
+    transition: height 1000ms; /*Speed of the input area*/
     overflow: hidden;
 }
 
-.hideInputText{
-    
+.hideInputText{ /*Hide input text styling*/
     width:100%;
     align-items: center;
     justify-content: flex-start;
@@ -177,22 +195,18 @@ body{
     border-top: 3px solid black; 
 }
 
-input[type=checkbox]:checked + p {
-    text-decoration: line-through;
-  } 
-
-::-webkit-scrollbar {
+::-webkit-scrollbar { /*Keeps the scrollbar in the todolist visable*/
     -webkit-appearance: none;
     width: 0.3rem;
 }
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb { /*Styles the todolist scrollbar*/
     border-radius: 4px;
     background-color: rgb(0,0,0);
     padding-right: 0.7rem;
 
 }
 
-.maximizeTextInTodo{
+.maximizeTextInTodo{ /*If the text is to long the text turns to ...*/
     text-overflow: ellipsis; 
     display: block; 
     overflow: hidden; 
@@ -202,15 +216,15 @@ input[type=checkbox]:checked + p {
 
 @media only screen and (min-width: 45em){
 
-    .todoList{
+    .todoList{ /*Todolist responsive size fixed in todo.js*/
         height: 22rem;
     }
 
-    .addTodoButton{
+    .addTodoButton{ /*Changes sizes on larger screen*/
         width:20rem;
     }
 
-    .slideInputText{
+    .slideInputText{ /*Changes sizes on larger screen*/
         width:20rem;
     }
 }

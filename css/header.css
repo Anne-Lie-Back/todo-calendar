@@ -1,9 +1,9 @@
-header{
+header{ /*Main header styling*/
     grid-area: header;
     background-color: #ffffff;
 }
 
-.headerBanner{
+.headerBanner{ /*Main banner styling*/
     background-color: #fbed21;
     height: 6rem;
     margin: 2rem 0 0 0;
@@ -12,14 +12,14 @@ header{
     justify-content: space-between;
 }
 
-.logo p{
+.logo p{ /*Logo styling*/
     color: #fbed21;;
     -webkit-text-stroke: 2px black;
     font-size: 5rem;
     line-height: 100%;
 }
 
-.dates-and-clock-mobile{
+.dates-and-clock-mobile{ /* Styles the mobile date and clock - line-height keeps the placing*/
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -44,7 +44,7 @@ header{
 
 
 @media only screen and (min-width: 45em){
-    .dates-and-clock-mobile{
+    .dates-and-clock-mobile{ /*Hide clock and date in mobile  - (The other clock and date is in aside)*/
         display: none;
     }
 }
