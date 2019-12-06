@@ -23,8 +23,7 @@ function calendarStart(){
     currentViewMonth = new Date().getMonth();
     addDaysToCalendar(currentViewYear,currentViewMonth); // fills empty container with day boxes.
 
-    //listens for events on todo list, for when to update number of todos in calendar.
-    document.querySelector('.todoContainer').addEventListener('click', event => {todoClick(event);});
+    
 }
 
 
@@ -34,22 +33,14 @@ function calendarStart(){
  * @param {number} setMonth 
  */
 function addDaysToCalendar(setYear,setMonth){
-    removeAllDays();//clear old month view.
-
+    removeAllDays();
     helgDagarAPI(setYear, setMonth)
-
-    fillEmptyDays(getFirstWeekdayOfMonth(setYear,setMonth));//
-
+    fillEmptyDays(getFirstWeekdayOfMonth(setYear,setMonth));
     addDayDivsToMonth(setYear, setMonth);
-
     changeCalendarYearMonthName(setYear,setMonth);
-
     fillLastEmptyDays();
-
     updateCalendarTodo();
-
 }
-
 
 /**fill day divs in calendar-container.
  * 
@@ -92,7 +83,6 @@ function fillEmptyDays(nrOfEmptyDays){
     }
 }
 
-
 /**
  * Fill rest of calendar empty days at last week of month to have a full grid.
  */
@@ -111,7 +101,6 @@ function fillLastEmptyDays(){
     }
 }
 
-
 /**
  * Remove all calendar days for next month to be filled with new days.
  */
@@ -128,19 +117,16 @@ function removeAllDays(){
     }
 }
 
-
 /**Sets month text name at top of calendar.
  * 
  * @param {number} setYear 
  * @param {number} setMonth 
  */
 function changeCalendarYearMonthName(setYear,setMonth){
-
     const monthName = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
     document.querySelector('.calendar-year').innerHTML = setYear;//update year on top of calendar.
     document.querySelector('.calendar-month').innerHTML = monthName[setMonth];//add one so december is month 12
 }
-
 
 /**what day of week to start adding calendar days.
  * 
@@ -152,7 +138,6 @@ function getFirstWeekdayOfMonth(setYear,setMonth){
     return firstWeekday;    //0 is sunday, 1 is monday.
 }
 
-
 /**How many days are there in current month to add to calendar.
  * 
  * @param {number} setYear 
@@ -163,7 +148,6 @@ function getDaysInMonth(setYear,setMonth){
     let nrDaysInMonth = new Date(setYear, (setMonth+1), 0).getDate();
     return nrDaysInMonth;
 }
-
 
 /**
  * Change month view, add one month and then add the new month to calendar.
@@ -195,7 +179,6 @@ function prevMonth(){
     addDaysToCalendar(currentViewYear,currentViewMonth);
 }
 
-
 /**API for holidays. month 1 is january and 12 is december.
  * When response is received, addHelgAPIToCalendar is called.
  * @param {number} getYear 
@@ -211,7 +194,6 @@ async function helgDagarAPI(getYear,getMonth){
     catch (error){
         console.log(error);
     }
-    
 }
 
 /**
@@ -224,7 +206,6 @@ async function helgDagarAPI(getYear,getMonth){
  * @param {Array<dagar>} helgMonth 
  */
 function addHelgAPIToCalendar(helgMonth){
-
     let listOfDays = document.querySelectorAll('.calendar-day');
     
     for(let i = 0; i < Object.keys(helgMonth.dagar).length ; i++){
@@ -234,7 +215,6 @@ function addHelgAPIToCalendar(helgMonth){
         }
     }
 }
-
 
 /**
  * Get todo's saved in local storage from function in todo.js and adds them to calendar days as a number.
@@ -279,8 +259,8 @@ function updateCalendarTodo(){
             dayDiv.querySelector(".dayTodoDiv").innerHTML = "";
         }
     }
-
 }
+
 /**
  * 
  * @typedef {{className: string}} target
