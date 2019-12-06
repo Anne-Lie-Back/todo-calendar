@@ -97,7 +97,6 @@ function initAddTodoToList(){
 function gatherTodoInput(){
     const titleTodo = document.querySelector("#titleTodo");
     const dateTodo = document.querySelector("#inputDate");
-    
 
     let todoObject = {
         "title": titleTodo.value,
@@ -112,7 +111,6 @@ function gatherTodoInput(){
     addTodoElementToList(todoObject);
     saveTodosToLocalStorage(todos);
     }
-
     else{
         updateEditTodo(todoObject)
         editTodoChosen = false;
@@ -135,7 +133,7 @@ function gatherTodoInput(){
 
 /**
  * send todoObject to function that creates li-elements and appends the created li to todo-ul.
- * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input.
+ * @param {Object} todoObject - contains TITLE of todo-input, DATE of todo-input and the isChecked todo-boolean.
  */
 function addTodoElementToList(todoObject){
     const li = createTodoElement(todoObject);
@@ -144,7 +142,7 @@ function addTodoElementToList(todoObject){
 
 /**
  * Creates li-element with user's input.
- * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input.
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input and the isChecked todo-boolean.
  * @returns{HTMLLIElement} li - the created li-element.
  */
 function createTodoElement(todoObject){
@@ -164,7 +162,6 @@ function createTodoElement(todoObject){
     const todoDate = document.createElement('span');
 
     if(todoObject.isChecked){
-        console.log(todoObject)
         checkbox.checked = "true";
     } 
 
@@ -175,11 +172,17 @@ function createTodoElement(todoObject){
     div2.append(iconEdit, iconRemove);
     
     checkbox.addEventListener('click', function() { saveCheckedTodo(todoObject)});
-    iconRemove.addEventListener('click', function() { removeTodo(todoObject) });
     iconEdit.addEventListener('click', function(){editTodo(todoObject)});
+    iconRemove.addEventListener('click', function() { removeTodo(todoObject) });
     
     return li;
 }
+
+/**
+ * Toggles if the user has checkboxed a todo and saves it in local storage. 
+ * If todoObject.isChecked is true, the user has checked the checkbox for that todo.
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input and the isChecked todo-boolean.
+ */
 
 function saveCheckedTodo(todoObject){
     
@@ -188,7 +191,6 @@ function saveCheckedTodo(todoObject){
         searchPositionForTodo(index, todoObject);
         todoObject.isChecked = true;
         updateEditTodo(todoObject);
-        console.log('sant')
     }
 
     else if (todoObject.isChecked){
@@ -196,8 +198,6 @@ function saveCheckedTodo(todoObject){
         searchPositionForTodo(index, todoObject);
         todoObject.isChecked = false;
         updateEditTodo(todoObject);
-        
-        console.log('falsk')
     }
 } 
 
@@ -205,7 +205,7 @@ function saveCheckedTodo(todoObject){
 
 /**
  * Calls function that find position for selected "old" todo, shows input-field with old todo-values.
- * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input and the isChecked todo-boolean. 
  */
 
 function editTodo(todoObject){
@@ -223,8 +223,8 @@ function editTodo(todoObject){
 
 /**
  * Finds the position of the todo and returns it
- * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
- * @returns {number} i - index
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input and the isChecked todo-boolean. 
+ * @returns {Number} i - index
  */
 function searchPositionForTodo(i, todoObject){
     const todos = getTodosFromLocalStorage();
@@ -249,12 +249,11 @@ function updateEditTodo(todoObject){
     saveTodosToLocalStorage(todos);
 }
 
-
 /*** REMOVE TODO FUNCTIONS */
 
 /**
  * removes the targeted li-element and triggers remove targeted todo from local storage.
- * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input and the isChecked todo-boolean. 
  */
 function removeTodo(todoObject){
     let doneTodo = event.target.closest('li');
@@ -264,20 +263,18 @@ function removeTodo(todoObject){
 
 /**
  * removes the selected todo from local storage and sends the new list to be saved in local storage.
- * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input. 
+ * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input and the isChecked todo-boolean. 
  */
 function removeTodoFromLocalStorage(todoObject){
    
     const todos = getTodosFromLocalStorage();
     let index = -1;
-    console.log('splice please?', index)
     for (let i = 0; i < todos.length; i++) {
         const storedTodo = todos[i];
         if(storedTodo.title == todoObject.title && storedTodo.date == todoObject.date){
             index = i;       
         }
     }
-    console.log(index)
     todos.splice(index, 1);
     saveTodosToLocalStorage(todos);
 }

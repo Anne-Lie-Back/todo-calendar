@@ -7,4 +7,3 @@ function init(){
     resizesTodoList();
     window.addEventListener('resize', resizesTodoList);
 }
-

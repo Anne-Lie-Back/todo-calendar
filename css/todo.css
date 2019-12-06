@@ -43,6 +43,8 @@
     height:22rem;
 }
 
+
+.todoList ul{
 input[type="checkbox"]{ /*Main checkbox styling*/
     -webkit-appearance:none; /*Removes default styling*/
     background-color: #fff;
@@ -104,7 +106,6 @@ input[type="checkbox"]:checked:before { /*Checkbox when checked styling*/
     font-size:1.5rem;
 }
 
-
 .todoList .removeTodoIcon:hover{ /*Hover effect on the remove-button*/
  cursor: pointer;
  color: #fbed21;
@@ -140,7 +141,6 @@ input[type="checkbox"]:checked:before { /*Checkbox when checked styling*/
     margin: 1rem;
     border: 3px solid black;
     outline: none;
-
 }
 
 .inputDate{ /*Styles date input field*/
@@ -195,6 +195,15 @@ input[type="checkbox"]:checked:before { /*Checkbox when checked styling*/
     border-top: 3px solid black; 
 }
 
+input[type=checkbox]:checked + p {
+    text-decoration: line-through;
+} 
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0.3rem;
+}
+
 ::-webkit-scrollbar { /*Keeps the scrollbar in the todolist visable*/
     -webkit-appearance: none;
     width: 0.3rem;
@@ -203,7 +212,6 @@ input[type="checkbox"]:checked:before { /*Checkbox when checked styling*/
     border-radius: 4px;
     background-color: rgb(0,0,0);
     padding-right: 0.7rem;
-
 }
 
 .maximizeTextInTodo{ /*If the text is to long the text turns to ...*/
