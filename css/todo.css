@@ -54,6 +54,7 @@ input[type="checkbox"]{ /*Main checkbox styling*/
     top: -0.10rem; /*Relativ position*/
     border: solid black 0.1rem;
     outline: none;
+    cursor: pointer;
 }
 
 input[type="checkbox"]:checked:before { /*Checkbox when checked styling*/
@@ -107,11 +108,11 @@ input[type="checkbox"]:checked:before { /*Checkbox when checked styling*/
 }
 
 .todoList .removeTodoIcon:hover{ /*Hover effect on the remove-button*/
- cursor: pointer;
- color: #fbed21;
- background-color: black;
- border-radius:50px;
- transition: color 350ms ease-in-out; /*Styles hover effect*/
+    cursor: pointer;
+    color: #fbed21;
+    background-color: black;
+    border-radius:50px;
+    transition: color 350ms ease-in-out; /*Styles hover effect*/
 }
 
 .todoList .editTodoIcon{ /*Styling of remove-button*/

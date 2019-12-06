@@ -9,9 +9,7 @@
     display: none;
 }
 
-
 /*Calendar view is enabled when screen resolution is above 45em(720px). */
-
 @media only screen and (min-width: 45em){
     .calendar-container{
         display: grid;
@@ -24,7 +22,7 @@
         cursor: pointer;
         transition: background-color 0.3s;
     }
-
+  
     /*next month and date above calendar*/
     .calendar-top{
         text-align: center;
@@ -77,6 +75,7 @@
     /*Empty filler boxes för start and end of month.*/
     .empty-day{
         border:0.02rem black solid;
+        cursor: auto;
     }
 
     /*Todo numer div inside day boxes.*/
@@ -109,7 +108,7 @@
 
     /*Styles day box div if it is a holiday.*/
     .holiday{
-        background-color: #fc6060;
+        background-color: #fa7575;
     }
 }
 
@@ -120,13 +119,13 @@
     }
 
     .holiday{
-        background-color:  rgb(252, 96, 96);    
+        background-color: #fa7575;    
     }
 
     /*Holiday text div enabled.*/
     .dayHolidayDiv{
         overflow: hidden;
-        background-color: rgb(252, 96, 96);
+        background-color: #fa7575;
         border-radius: 0.2rem;
         display: block;
         text-overflow: ellipsis;
@@ -154,6 +153,6 @@
     }
 
     .holiday{
-        background-color: rgb(252, 96, 96);
+        background-color: #fa7575;
     }
 }
