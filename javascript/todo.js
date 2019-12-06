@@ -111,7 +111,6 @@ function gatherTodoInput(){
     addTodoElementToList(todoObject);
     saveTodosToLocalStorage(todos);
     }
-
     else{
         updateEditTodo(todoObject)
         editTodoChosen = false;
@@ -225,7 +224,7 @@ function editTodo(todoObject){
 /**
  * Finds the position of the todo and returns it
  * @param {Object} todoObject - contains TITLE of todo-input and DATE of todo-input and the isChecked todo-boolean. 
- * @returns {number} i - index
+ * @returns {Number} i - index
  */
 function searchPositionForTodo(i, todoObject){
     const todos = getTodosFromLocalStorage();
@@ -249,7 +248,6 @@ function updateEditTodo(todoObject){
     todos.splice(index, 1, todoObject);
     saveTodosToLocalStorage(todos);
 }
-
 
 /*** REMOVE TODO FUNCTIONS */
 

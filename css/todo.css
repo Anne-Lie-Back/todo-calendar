@@ -47,7 +47,6 @@ body{
     height:22rem;
 }
 
-/*edit experiment*/
 .todoList ul{
     display:flex;
     flex-direction:column;
@@ -83,7 +82,6 @@ body{
 .todoList .removeTodoIcon{
     font-size:1.5rem;
 }
-
 
 .todoList .removeTodoIcon:hover{
  cursor: pointer;
@@ -121,7 +119,6 @@ body{
     margin: 1rem;
     border: 3px solid black;
     outline: none;
-
 }
 
 .inputDate{
@@ -179,12 +176,13 @@ body{
 
 input[type=checkbox]:checked + p {
     text-decoration: line-through;
-  } 
+} 
 
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 0.3rem;
 }
+
 ::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: rgb(0,0,0);

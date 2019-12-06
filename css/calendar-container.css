@@ -9,7 +9,6 @@
     display: none;
 }
 
-
 @media only screen and (min-width: 45em){
     .calendar-container{
         display: grid;
@@ -96,13 +95,8 @@
     }
 
     .holiday{
-
         background-color: #fc6060;
-
     }
-
-
-
 }
 
 @media only screen and (min-width: 56em){
@@ -113,7 +107,6 @@
     .holiday{
         background-color:  rgb(252, 96, 96);    
     }
-
 
     .dayHolidayDiv{
         overflow: hidden;
@@ -146,5 +139,4 @@
     .holiday{
         background-color: rgb(252, 96, 96);
     }
-
 }
