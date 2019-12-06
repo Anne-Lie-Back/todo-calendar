@@ -1,4 +1,4 @@
-
+/*calendar-container is set to right side below header in style.css grid template area.*/
 .calendar-container{
     grid-area: calendar-container;
     background-color: white;
@@ -9,19 +9,21 @@
     display: none;
 }
 
+/*Calendar view is enabled when screen resolution is above 45em(720px). */
 @media only screen and (min-width: 45em){
     .calendar-container{
         display: grid;
         grid-template-columns: repeat(7, 14.28%);/*set grid to 7 columns monday to sunday.*/
-        grid-auto-rows: 1fr;
-        grid-template-rows: 2rem 2rem;/*set first row to fixed height for day of week name.*/
+        grid-auto-rows: 1fr;    /*sets default 1rf for all rows.*/
+        grid-template-rows: 2rem 2rem;/*set first two row to fixed height for day of week name.*/
         margin: 0 1rem 0.5rem 1rem;
         border:0.1rem black solid;
         background-color: white;
         cursor: pointer;
         transition: background-color 0.3s;
     }
-
+  
+    /*next month and date above calendar*/
     .calendar-top{
         text-align: center;
         overflow: hidden;
@@ -30,10 +32,12 @@
         -webkit-text-stroke: 1px black;
     }
 
+    /*Top left arrow for month change.*/
     .calendar-top-left{
         border-left:0.02rem black solid;
     }
 
+    /*Top right arrow for month change.*/
     .calendar-top-right{
         border-right:0.02rem black solid;
     }
@@ -41,7 +45,7 @@
     .calendar-top i{
         cursor: pointer;
     }
-
+    /*Mon-sun above calendar.*/
     .calendar-header{
         text-align: center;
         overflow: hidden;
@@ -50,6 +54,7 @@
         border-bottom:0.02rem black solid;
     }
 
+    /*Calendar day boxes.*/
     .calendar-day{
         padding: 0.3rem;
         display: flex;
@@ -62,15 +67,18 @@
         "holiday holiday holiday holiday";
     }
 
+    /*Day number div in day boxes.*/
     .dayNrDiv{
         grid-area: dayNr;
     }
 
+    /*Empty filler boxes för start and end of month.*/
     .empty-day{
         border:0.02rem black solid;
         cursor: auto;
     }
 
+    /*Todo numer div inside day boxes.*/
     .dayTodoDiv{
         background-color:#e2d84b;
         width: 1.4rem;
@@ -81,29 +89,30 @@
         justify-self: flex-end;
     }
 
-    /*Does not display empty div, so filled ones can be styled.*/
+    /*Does not display empty todo number div, so filled ones can be styled.*/
     .dayTodoDiv:empty {
         display: none;
     }
 
+    /*Div that holds holiday text.*/
     .dayHolidayDiv{
         display: none;
         grid-area: holiday;
         height: 1.4rem;
     }
 
+    /*Empty holiday dive is hidden.*/
     .dayHolidayDiv:empty{
         display: none;
     }
 
+    /*Styles day box div if it is a holiday.*/
     .holiday{
         background-color: #fa7575;
     }
-
-
-
 }
 
+/*Displays larger text and enables holiday text on larger screens. */
 @media only screen and (min-width: 56em){
     .calendar-header span{
         display: inline-block;
@@ -113,7 +122,7 @@
         background-color: #fa7575;    
     }
 
-
+    /*Holiday text div enabled.*/
     .dayHolidayDiv{
         overflow: hidden;
         background-color: #fa7575;
@@ -123,6 +132,7 @@
     }
 }
 
+/*For vertical displays below 28em, day boxes get smaller text to fit screen.*/
 @media only screen and (max-height: 28em){
     .dayNrDiv{
         font-size: 0.6rem;
@@ -136,8 +146,8 @@
     }
 }
 
+/*Disables holiday text inside day boxes on vertical height below 44em.*/
 @media only screen and (max-height: 44em){
-
     .dayHolidayDiv{
         display: none;
     }
@@ -145,5 +155,4 @@
     .holiday{
         background-color: #fa7575;
     }
-
 }

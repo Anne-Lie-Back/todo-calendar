@@ -1,25 +1,18 @@
-document.querySelector('.calendar-container').addEventListener('click', event => {calendarDayClicked(event);});
 
 //clicked. send to todo list.
+/**
+ * 
+ * @param {target} event 
+ */
 function calendarDayClicked(event){
     if(event.target.className === 'calendar-day' || event.target.className === 'calendar-day holiday'){
-        //console.log(event.target.id);
         addZeroDateFunc(event.target.id);
 
     }
-    else{
-        //console.log(event.target.className);
-        //console.log(event.target.parentElement.id + ' parent');
-    }
 
     if(event.target.parentElement.className === 'calendar-day' || event.target.parentElement.className === 'calendar-day holiday'){
-        //console.log(event.target.parentElement.id + 'parent')
         addZeroDateFunc(event.target.parentElement.id);
     }
-    else{
-        //console.log(event.target.parentElement.id);
-    }
-
 }
 
 function addZeroDateFunc(eventID){
@@ -28,10 +21,8 @@ function addZeroDateFunc(eventID){
     clickedDayObject.day = Number(eventID); //day of month.
     let clickedDayStyling = document.getElementById(clickedDayObject.day);
     const calendarContainer = document.querySelector('.calendar-container');
-    var calendarDay = document.querySelectorAll('.calendar-day');
-    var holiday = document.querySelectorAll('.holiday'); 
-
-
+    let calendarDay = document.querySelectorAll('.calendar-day');
+    let holiday = document.querySelectorAll('.holiday'); 
 
     // adds 0 to clickedDayObject so it matches todo
     clickedDayObjectMonth = addZeroToDates(clickedDayObject.month);
@@ -41,8 +32,6 @@ function addZeroDateFunc(eventID){
         return i;
       }
     let clickedDay = clickedDayObject.year + "-" + clickedDayObjectMonth + "-" + clickedDayObjectDay;
-
-
 
     if(calendarContainer.style.backgroundColor == "white"){
         calendarContainer.style.backgroundColor = "#c2c0c0"; // put color on calendar
@@ -66,8 +55,6 @@ function addZeroDateFunc(eventID){
           }
         loadTodos();
     }
-
-    
 }
 
 //Searches for todos on a selected date
