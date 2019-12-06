@@ -155,6 +155,7 @@ input[type="checkbox"]:checked:before { /*Checkbox when checked styling*/
     padding: 0.3rem 0.7rem;
     background-color: #fbed21;
     border:3px solid black;
+    outline:none;
 }
 
 .inputDate button:hover{ /*Styles hovering over input button*/
