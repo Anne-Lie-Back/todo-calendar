@@ -1,12 +1,15 @@
 window.addEventListener('load', init);
 
+/**
+ * The fist starter function that starts all other script starter functions.
+ */
 function init(){
     calendarStart();
     loadTodos();
     addTodo();
     resizesTodoList();
 
-    //
+    //Listens for resize event to calculate height of todo list.
     window.addEventListener('resize', resizesTodoList);
     
     //Listens for clicks on calendar days.
