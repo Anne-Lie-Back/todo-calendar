@@ -9,7 +9,9 @@
     display: none;
 }
 
+
 /*Calendar view is enabled when screen resolution is above 45em(720px). */
+
 @media only screen and (min-width: 45em){
     .calendar-container{
         display: grid;
@@ -109,9 +111,6 @@
     .holiday{
         background-color: #fc6060;
     }
-
-
-
 }
 
 /*Displays larger text and enables holiday text on larger screens. */

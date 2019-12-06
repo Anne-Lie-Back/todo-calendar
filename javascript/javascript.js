@@ -14,5 +14,4 @@ function init(){
 
     //Listens for events on todo list, for when to update number of todos in calendar.
     document.querySelector('.todoContainer').addEventListener('click', event => {todoClick(event);});
-}
-
+ }
