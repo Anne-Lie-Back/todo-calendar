@@ -29,9 +29,7 @@ function addDaysToCalendar(setYear,setMonth){
 
     //console.log(getTodosFromLocalStorage())
     //console.log('local ')
-
     updateCalendarTodo();
-
 }
 
 //fill day divs in calendar-container.

@@ -45,7 +45,7 @@ function addZeroDateFunc(eventID){
 
 
     if(calendarContainer.style.backgroundColor == "white"){
-        calendarContainer.style.backgroundColor = "#e6e6d5"; // put color on calendar
+        calendarContainer.style.backgroundColor = "#c2c0c0"; // put color on calendar
         clickedDayStyling.style.backgroundColor = "#fbed21"; // put color on selected day
 
         filterToClickedDay(clickedDay);
@@ -57,7 +57,7 @@ function addZeroDateFunc(eventID){
         }
 
         for(i=0 ; i < holiday.length; i++){
-            holiday[i].style.backgroundColor = "#fc6060";
+            holiday[i].style.backgroundColor = "#fa7575";
         }
 
         let ul = document.querySelector('ul')

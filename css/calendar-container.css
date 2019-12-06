@@ -9,7 +9,6 @@
     display: none;
 }
 
-
 @media only screen and (min-width: 45em){
     .calendar-container{
         display: grid;
@@ -22,6 +21,7 @@
         cursor: pointer;
         transition: background-color 0.3s;
     }
+
     .calendar-top{
         text-align: center;
         overflow: hidden;
@@ -68,6 +68,7 @@
 
     .empty-day{
         border:0.02rem black solid;
+        cursor: auto;
     }
 
     .dayTodoDiv{
@@ -96,9 +97,7 @@
     }
 
     .holiday{
-
-        background-color: #fc6060;
-
+        background-color: #fa7575;
     }
 
 
@@ -111,13 +110,13 @@
     }
 
     .holiday{
-        background-color:  rgb(252, 96, 96);    
+        background-color: #fa7575;    
     }
 
 
     .dayHolidayDiv{
         overflow: hidden;
-        background-color: rgb(252, 96, 96);
+        background-color: #fa7575;
         border-radius: 0.2rem;
         display: block;
         text-overflow: ellipsis;
@@ -144,7 +143,7 @@
     }
 
     .holiday{
-        background-color: rgb(252, 96, 96);
+        background-color: #fa7575;
     }
 
 }
